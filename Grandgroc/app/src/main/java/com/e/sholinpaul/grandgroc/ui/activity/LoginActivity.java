@@ -28,6 +28,9 @@ public class LoginActivity extends BaseActivity implements LoginListener {
         View view = binding.getRoot();
         setContentView(view);
         init();
+
+
+
     }
 
     private void init() {

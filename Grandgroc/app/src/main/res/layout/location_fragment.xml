@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.LocationFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tvHDeliveryLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DELIVERY LOCATION"
+            android:drawableStart="@drawable/ic_delivery_icon"
+            android:textStyle="bold"
+            android:drawablePadding="10dp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tvHAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHDeliveryLocation"
+            android:text="Address : "
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHAddress"
+            android:text="Mundoor Maadan "
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/tvHomeAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:textColor="@color/colorBlack"
+            android:text="Meenachirayil(H) ,Arakulam Po "
+            android:layout_marginTop="3dp" />
+
+        <TextView
+            android:id="@+id/tvLocation1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHomeAddress"
+            android:textColor="@color/colorBlack"
+            android:text="Peedikapally , 658655"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/tvDistrict"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLocation1"
+            android:textColor="@color/colorBlack"
+            android:text="Thrissur "
+            android:layout_marginTop="5dp" />
+
+
+        <TextView
+            android:id="@+id/tvHLandmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvDistrict"
+            android:text="Landmark : "
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/tvLandmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHLandmark"
+            android:textColor="@color/colorBlack"
+            android:text="Thrissur "
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/tvHPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLandmark"
+            android:text="Mobile No : "
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHPhone"
+            android:textColor="@color/colorBlack"
+            android:text="9778006586 "
+            android:layout_marginTop="5dp" />
+
+
+        <TextView
+            android:id="@+id/tvHPickupLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PICKUP LOCATION"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"
+            android:layout_below="@id/tvPhone"
+            android:textColor="@color/colorBlack" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

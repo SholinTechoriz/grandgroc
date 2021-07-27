@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Grandgroc</string>
+    <string name="login">Login</string>
+    <string name="discover_the_best_and_fresh_grocery_items_from_grandgroc_grocery_app_and_fast_delivery_to_your_doorstep">Discover the best and fresh grocery items from Grandgroc grocery app and fast delivery to your doorstep</string>
+    <string name="let_s_get_started">Let\'s get started</string>
+    <string name="sign_in_to_grandgroc">Sign in to Grandgroc</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="wait_for_a_moment">  Wait For a Moment.</string>
+    <string name="logging">Logging</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Grandgroc</string>
+    <string name="nav_header_subtitle">Kozhikode</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="contentDesp">content description</string>
+
+
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_viewOrders">ViewOrders</string>
+    <string name="logout">Logout</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="new_order_s_not_available">New-order\'s not Available</string>
+    <string name="current_order_s_not_available">Current-order\'s not Available</string>
+    <string name="last_page">Last page</string>
+    <string name="qr_scanner">qr_scanner</string>
+
+
+</resources>

@@ -1,0 +1,2 @@
+rootProject.name = "Grandgroc"
+include ':app'

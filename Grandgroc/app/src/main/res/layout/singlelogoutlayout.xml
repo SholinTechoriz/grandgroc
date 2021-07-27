@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorUltraLightGreen"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/tvLgText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Do u want to logout ..?"
+            android:fontFamily="@font/muli_semi_bold_italic"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_margin="6dp"
+            android:textColor="@color/colorBlack"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btnYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:fontFamily="@font/muli_semi_bold_italic"
+            android:layout_margin="8dp"
+            android:layout_below="@id/tvLgText"
+            android:textColor="@color/colorBlack"
+            android:background="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/btnNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:fontFamily="@font/muli_semi_bold_italic"
+            android:layout_margin="8dp"
+            android:layout_below="@id/tvLgText"
+            android:layout_toEndOf="@id/btnYes"
+            android:textColor="@color/colorBlack"
+            android:background="@color/colorWhite" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

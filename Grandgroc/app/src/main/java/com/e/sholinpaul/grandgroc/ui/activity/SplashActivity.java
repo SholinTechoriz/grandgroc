@@ -28,13 +28,10 @@ public class SplashActivity extends AppCompatActivity {
                 "delivery to your doorstep";
         binding.tvContent.setText(text1);
 
-        binding.btnGotoLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        binding.btnGotoLogin.setOnClickListener(view -> {
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 }

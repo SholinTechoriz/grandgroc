@@ -68,42 +68,33 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
     private void init() {
 
         fetchProfile();
-        binding.fabProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.fabProfile.setOnClickListener(view -> {
 
-                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            SELECT_PROFILE_PIC_REQUEST_CODE);
-                } else {
-                    showImageAlert();
-                }
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        SELECT_PROFILE_PIC_REQUEST_CODE);
+            } else {
+                showImageAlert();
+            }
 
 
+        });
+
+        binding.btnUpdate.setOnClickListener(v -> {
+            if (binding.btnUpdate.getText().equals("Edit")) {
+                setDataToEdit(model);
+
+            } else {
+                validateAndUpdateDataToServer();
             }
         });
 
-        binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (binding.btnUpdate.getText().equals("Edit")) {
-                    setDataToEdit(model);
-
-                } else {
-                    validateAndUpdateDataToServer();
-                }
-            }
-        });
-
-        binding.tvChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
-                Log.d("ACCESS12", "access token is.." + accessToken);
-                deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
-                showChangePassword(accessToken, deviceId);
-            }
+        binding.tvChangePassword.setOnClickListener(v -> {
+            accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
+            Log.d("ACCESS12", "access token is.." + accessToken);
+            deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
+            showChangePassword(accessToken, deviceId);
         });
 
 

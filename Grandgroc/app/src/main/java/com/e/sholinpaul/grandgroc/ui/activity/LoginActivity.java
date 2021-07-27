@@ -29,21 +29,16 @@ public class LoginActivity extends BaseActivity implements LoginListener {
         setContentView(view);
         init();
 
-
-
     }
 
     private void init() {
         binding.edUsername.setText("adilmycareer@gmail.com");
         binding.edPassword.setText("123123");
-        binding.btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (doubleClickPrevent()) {
-                    hideKeyboard(v);
-                    validateLogin();
+        binding.btnSignIn.setOnClickListener(v -> {
+            if (doubleClickPrevent()) {
+                hideKeyboard(v);
+                validateLogin();
 
-                }
             }
         });
 

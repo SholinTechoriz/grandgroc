@@ -85,12 +85,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         Menu menu = navigationView.getMenu();
         MenuItem nav_logout = menu.findItem(R.id.nav_logout);
-        nav_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Logout();
-                return false;
-            }
+        nav_logout.setOnMenuItemClickListener(menuItem -> {
+            Logout();
+            return false;
         });
 
     }
@@ -108,18 +105,15 @@ public class DashboardActivity extends AppCompatActivity {
         InsetDrawable inset = new InsetDrawable(back, 20);
         dialog.getWindow().setBackgroundDrawable(inset);
         dialog.show();
-        layoutBinding.btnYes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        layoutBinding.btnYes.setOnClickListener(view1 -> {
 
-                SharedPreferences preferences = getSharedPreferences("MyLoyalitySharedPref", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.apply();
+            SharedPreferences preferences = getSharedPreferences("MyLoyalitySharedPref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.apply();
 
-                finish();
-                dialog.dismiss();
-            }
+            finish();
+            dialog.dismiss();
         });
         layoutBinding.btnNo.setOnClickListener(new View.OnClickListener() {
             @Override

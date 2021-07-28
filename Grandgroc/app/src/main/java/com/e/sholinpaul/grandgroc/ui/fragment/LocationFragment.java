@@ -34,8 +34,17 @@ public class LocationFragment extends Fragment implements OrderDetailsListener {
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
-        Order_id = orderModel.getOrder_id();
-        id = orderModel.getId();
+
+
+         String state = getArguments().getString("State");
+
+
+        if (state.equals("activestate")) {
+            Order_id = Integer.parseInt(getArguments().getString("orderscanned"));
+        } else {
+            Order_id = orderModel.getOrder_id();
+            id = orderModel.getId();
+        }
         fetchAllOrderList();
     }
 

@@ -2,7 +2,6 @@ package com.e.sholinpaul.grandgroc.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,7 +24,10 @@ public class OrderDetailsActivity extends BaseActivity {
     ActivityOrderDetailsBinding binding;
     Context mContext;
     OrderModel orderModel;
+    String order_Id;
+
     ArrayList<Fragment> mFragmentArrayList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,6 @@ public class OrderDetailsActivity extends BaseActivity {
 
         setupViewPager();
         CustomTabView();
-
-
 
     }
 
@@ -62,7 +62,19 @@ public class OrderDetailsActivity extends BaseActivity {
     private void setupViewPager() {
 
         orderModel = getIntent().getParcelableExtra("order");
-        toolbarSection("#OrderID " + orderModel.getOrder_id(), true);
+
+        String State = getIntent().hasExtra("ActivityState") ? getIntent().getStringExtra("ActivityState") : "";
+
+        if (State.equals("scanActivity")) {
+            order_Id = getIntent().getStringExtra("ORDER_ID");
+            toolbarSection("#OrderID " + order_Id, true);
+
+        } else {
+            order_Id = String.valueOf(orderModel.getOrder_id());
+            toolbarSection("#OrderID " + order_Id, true);
+
+        }
+
 
         binding.viewpager1.setAdapter(new TabFragmentPagerAdapter(this.getSupportFragmentManager()));
         binding.tabs1.setupWithViewPager(binding.viewpager1);
@@ -71,6 +83,10 @@ public class OrderDetailsActivity extends BaseActivity {
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("order", orderModel);
+
+        bundle.putString("orderscanned", order_Id);
+        bundle.putString("State", "activestate");
+
 
         Fragment fragment = null;
 

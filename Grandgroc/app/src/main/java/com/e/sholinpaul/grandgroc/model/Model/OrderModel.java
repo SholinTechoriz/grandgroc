@@ -60,6 +60,9 @@ public class OrderModel implements Parcelable {
     @SerializedName("api_token")
     private String api_token;
 
+    @SerializedName("assignordersID")
+    private int assignordersID;
+
     protected OrderModel(Parcel in) {
         id = in.readInt();
         order_id = in.readInt();
@@ -87,6 +90,7 @@ public class OrderModel implements Parcelable {
         Order_id = in.readInt();
         device_id = in.readString();
         api_token = in.readString();
+        assignordersID = in.readInt();
     }
 
     @Override
@@ -117,6 +121,7 @@ public class OrderModel implements Parcelable {
         dest.writeInt(Order_id);
         dest.writeString(device_id);
         dest.writeString(api_token);
+        dest.writeInt(assignordersID);
     }
 
     @Override
@@ -313,7 +318,6 @@ public class OrderModel implements Parcelable {
     }
 
 
-
     public String getDeleted_at() {
         return deleted_at;
     }
@@ -321,9 +325,6 @@ public class OrderModel implements Parcelable {
     public void setDeleted_at(String deleted_at) {
         this.deleted_at = deleted_at;
     }
-
-
-
 
 
     public String getDevice_id() {
@@ -340,5 +341,13 @@ public class OrderModel implements Parcelable {
 
     public void setApi_token(String api_token) {
         this.api_token = api_token;
+    }
+
+    public int getAssignordersID() {
+        return assignordersID;
+    }
+
+    public void setAssignordersID(int assignordersID) {
+        this.assignordersID = assignordersID;
     }
 }

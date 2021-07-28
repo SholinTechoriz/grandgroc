@@ -1,8 +1,10 @@
 package com.e.sholinpaul.grandgroc.ui.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
 import android.view.View;
 import android.widget.Toast;
@@ -22,7 +24,6 @@ import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.QRCodeFoundListener;
 import com.e.sholinpaul.grandgroc.databinding.ActivityScannerBinding;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
 
 public class ScannerActivity extends BaseActivity {
@@ -47,20 +48,23 @@ public class ScannerActivity extends BaseActivity {
 
     private void init() {
         binding.activityMainQrCodeFoundButton.setVisibility(View.INVISIBLE);
-//        binding.activityMainQrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ScannerActivity.this, ScannedDataActivity.class);
-//                intent.putExtra("ORDER_ID", ""+convertedOrderId);
-//                startActivityForResult(intent, 301);
-//                Log.i(QRCodeScanningActivity.class.getSimpleName(), "Data Found: " + qrCode);
-//
-//            }
-//        });
+        binding.activityMainQrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScannerActivity.this, OrderDetailsActivity.class);
+                intent.putExtra("ORDER_ID", "" + qrCode);
+                intent.putExtra("ActivityState", "scanActivity");
+
+                startActivityForResult(intent, 301);
+                Log.i(ScannerActivity.class.getSimpleName(), "Data Found: " + qrCode);
+
+            }
+        });
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         requestCamera();
     }
+
 
     private void requestCamera() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -119,16 +123,18 @@ public class ScannerActivity extends BaseActivity {
             @Override
             public void onQRCodeFound(String _qrCode) {
                 qrCode = _qrCode;
-                StringTokenizer tokens = new StringTokenizer(_qrCode, "|");
 
-                //////////////Order id///////////
-                String first = tokens.nextToken();
 
-                StringTokenizer firstData = new StringTokenizer(first, "-");
-                String firstData1 = firstData.nextToken();
-                String firstData2 = firstData.nextToken();
-
-                convertedOrderId = Integer.parseInt(firstData2);
+//                StringTokenizer tokens = new StringTokenizer(_qrCode, "|");
+//
+//                //////////////Order id///////////
+//                String first = tokens.nextToken();
+//
+//                StringTokenizer firstData = new StringTokenizer(first, "-");
+//                String firstData1 = firstData.nextToken();
+//                String firstData2 = firstData.nextToken();
+//
+//                convertedOrderId = Integer.parseInt(firstData2);
 
 //                ////////////store id//////////
 //                String second = tokens.nextToken();
@@ -138,7 +144,6 @@ public class ScannerActivity extends BaseActivity {
 //                String secondData2 = secondData.nextToken();
 //
 //                convertedStoreId = Integer.parseInt(secondData2);
-
 
                 binding.activityMainQrCodeFoundButton.setVisibility(View.VISIBLE);
 

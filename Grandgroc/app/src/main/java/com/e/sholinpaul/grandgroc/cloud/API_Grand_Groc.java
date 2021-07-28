@@ -1,11 +1,13 @@
 package com.e.sholinpaul.grandgroc.cloud;
 
 import com.e.sholinpaul.grandgroc.model.Model.LoginModel;
+import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.model.Responses.ChangePasswordResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.GetTypeListResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.LoginResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.NewOrderResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.OrderListResponse;
+import com.e.sholinpaul.grandgroc.model.Responses.PostChangeStatusResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.ProfileResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.UpdateUserProfileResponse;
 
@@ -46,4 +48,9 @@ public interface API_Grand_Groc {
 
     @GET("delivary/delivarytypes/list")
     Call<GetTypeListResponse> AllOrderTypes(@Query("device_id") String device_id, @Query("api_token") String api_token);
+
+    @POST("delivary/scan_qr/orderstatus")
+    Call<PostChangeStatusResponse> PostChangeStatus(@Body OrderModel data);
+
+
 }

@@ -5,9 +5,12 @@ import android.content.Context;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.GetOrderTypeListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.NewOrderListListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.OrderDetailsListener;
+import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.PostStatusChangeListener;
+import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.model.Responses.GetTypeListResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.NewOrderResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.OrderListResponse;
+import com.e.sholinpaul.grandgroc.model.Responses.PostChangeStatusResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -146,5 +149,42 @@ public class OrdersCloudManager extends BaseCloudManger {
 //        }
     }
 
+
+    public void PostStatusByScanner(final OrderModel data, final PostStatusChangeListener listener) {
+        if (!checkConnection(listener)) {
+            return;
+        }
+        Call<PostChangeStatusResponse> call = api.PostChangeStatus(data);
+        call.enqueue(new Callback<PostChangeStatusResponse>() {
+            @Override
+            public void onResponse(Call<PostChangeStatusResponse> call, Response<PostChangeStatusResponse> response) {
+                PostChangeStatusResponse postChangeStatusResponse = response.body();
+                if (postChangeStatusResponse != null) {
+                    if (postChangeStatusResponse.success == "true") {
+                        if (listener != null) {
+                            listener.postChangeStatus(data, postChangeStatusResponse.Message);
+                        }
+                    } else {
+                        if (listener != null) {
+                            listener.onCompleted();
+                            listener.postChangeStatusFailed(response.message());
+                        }
+                    }
+                    if (listener != null) {
+                        listener.onCompleted();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostChangeStatusResponse> call, Throwable t) {
+                if (listener != null) {
+                    listener.onCompleted();
+                    listener.postChangeStatusFailed("failed");
+                }
+            }
+        });
+
+    }
 
 }

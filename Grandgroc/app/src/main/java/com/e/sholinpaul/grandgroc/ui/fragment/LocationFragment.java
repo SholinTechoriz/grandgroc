@@ -1,6 +1,7 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,32 +38,55 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
+        final String Qr_Orderid = getArguments().getString("State");
 
-        String state = getArguments().getString("State");
 
-//        if (state.equals("activestate")) {
-//            Order_id = Integer.parseInt(getArguments().getString("orderscanned"));
-//        } else {
-        Order_id = orderModel.getOrder_id();
-        id = orderModel.getId();
-//        }
+        if (Qr_Orderid.equals("activestate")) {
+            final String OId=getArguments().getString("orderscanned");
+            Order_id= Integer.parseInt(OId);
+            id=1;
+            Log.d("qwerty"," Order id 1 : "+Order_id);
+
+        } else {
+            Order_id = orderModel.getOrder_id();
+            id = orderModel.getId();
+            Log.d("qwerty"," Order id 2 : "+Order_id);
+
+        }
+
+
         fetchAllOrderList();
 
         binding.btnCollected.setOnClickListener(v -> {
 
             status = "collected";
-            postChangeStatus();
+            if (Qr_Orderid.equals("activestate")) {
+                postChangesByScanner();
+            }else{
+                postChangeStatus();
+
+            }
         });
 
         binding.btnDelivered.setOnClickListener(v -> {
             status = "delivered";
-            postChangeStatus();
+            if (Qr_Orderid.equals("activestate")) {
+                postChangesByScanner();
+            }else{
+                postChangeStatus();
+
+            }
         });
 
         binding.btnCompleted.setOnClickListener(v -> {
 
             status = "completed";
-            postChangeStatus();
+            if (Qr_Orderid.equals("activestate")) {
+                postChangesByScanner();
+            }else{
+                postChangeStatus();
+
+            }
         });
     }
 
@@ -73,6 +97,21 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         OrdersCloudManager ordersCloudManager = new OrdersCloudManager(getActivity());
         ordersCloudManager.fetchAllOrdersList(deviceId, accessToken, id, Order_id, this);
 //        binding.lLoading.setVisibility(View.VISIBLE);
+
+    }
+
+
+    private void postChangesByScanner(){
+        OrderModel orderModel = new OrderModel();
+        accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
+        deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
+
+        orderModel.setDevice_id(deviceId);
+        orderModel.setApi_token(accessToken);
+        orderModel.setStatus(status);
+        orderModel.setAssignordersID(id);
+        OrdersCloudManager ordersCloudManager = new OrdersCloudManager(getActivity());
+        ordersCloudManager.PostStatusByScanner(orderModel, this);
 
     }
 
@@ -112,6 +151,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
 
         status = AssignedOrder.getStatus();
+        setDataToTextview(order);
 
 
         if (status.equals("collected")) {
@@ -143,9 +183,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
             binding.btnCollected.setTextColor(getResources().getColor(R.color.colorBlack));
 
         }
-        
 
-        setDataToTextview(order);
 
     }
 
@@ -170,8 +208,15 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        fetchAllOrderList();
+    }
+
+    @Override
     public void postChangeStatus(OrderModel data, String Message) {
         Toast.makeText(getActivity(), Message, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvHOrderStatus"
             android:layout_marginTop="10dp"
-            android:background="@drawable/order_roundshape"
+
             android:orientation="horizontal"
             android:padding="10dp"
             android:weightSum="3">
@@ -138,10 +138,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:background="@color/colorUltraLightGreen"
+                android:background="@drawable/order_roundshape"
                 android:padding="5dp"
                 android:text="Collected"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textStyle="bold" />
 
             <Button
@@ -150,10 +150,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:background="@color/colorUltraLightGreen"
+                android:background="@drawable/order_roundshape"
                 android:padding="5dp"
                 android:text="Delivered"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textStyle="bold" />
 
             <Button
@@ -162,10 +162,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:background="@color/colorUltraLightGreen"
+                android:background="@drawable/order_roundshape"
                 android:padding="5dp"
                 android:text="Completed"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textStyle="bold" />
 
         </LinearLayout>

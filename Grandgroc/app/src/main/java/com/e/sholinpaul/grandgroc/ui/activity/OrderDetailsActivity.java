@@ -67,6 +67,8 @@ public class OrderDetailsActivity extends BaseActivity {
 
         if (State.equals("scanActivity")) {
             order_Id = getIntent().getStringExtra("ORDER_ID");
+            toolbarSection("#OrderID " + order_Id, true);
+
 
         } else {
             order_Id = String.valueOf(orderModel.getOrder_id());
@@ -79,12 +81,16 @@ public class OrderDetailsActivity extends BaseActivity {
         binding.tabs1.setupWithViewPager(binding.viewpager1);
         binding.tabs1.setTabGravity(TabLayout.GRAVITY_CENTER);
 
+        Bundle bundle1 = new Bundle();
+        bundle1.putString("orderscanned", order_Id);
+        bundle1.putString("State", "activestate");
+
+
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("order", orderModel);
 
-        bundle.putString("orderscanned", order_Id);
-        bundle.putString("State", "activestate");
+
 
 
         Fragment fragment = null;
@@ -92,11 +98,13 @@ public class OrderDetailsActivity extends BaseActivity {
 
         fragment = new Items_Fragment();
         fragment.setArguments(bundle);
+        fragment.setArguments(bundle1);
         mFragmentArrayList.add(fragment);
 
 
         fragment = new LocationFragment();
         fragment.setArguments(bundle);
+        fragment.setArguments(bundle1);
         mFragmentArrayList.add(fragment);
 
 

@@ -1,6 +1,7 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,15 +41,24 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
-        final String state = getArguments().getString("State");
+
+        final String Qr_Orderid = getArguments().getString("State");
 
 
-//        if (state.equals("activestate")) {
-//            Order_id = Integer.parseInt(getArguments().getString("orderscanned"));
-//        } else {
+        if (Qr_Orderid.equals("activestate")) {
+            final String OId=getArguments().getString("orderscanned");
+            Order_id= Integer.parseInt(OId);
+            id=1;
+
+        } else {
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
-//        }
+
+        }
+
+
+
+
 
 
         fetchAllOrderList();

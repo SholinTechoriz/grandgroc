@@ -137,6 +137,12 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        fetchNewOrderFromServer(page);
+    }
+
+    @Override
     public void fetchNewOrder(AllOrderModel Assigned_orders) {
         orderData = Assigned_orders.getData();
         allOrderModel = Assigned_orders;

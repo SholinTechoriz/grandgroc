@@ -187,4 +187,41 @@ public class OrdersCloudManager extends BaseCloudManger {
 
     }
 
+    public void PostChangeStatusBy(final OrderModel data, final PostStatusChangeListener listener) {
+        if (!checkConnection(listener)) {
+            return;
+        }
+        Call<PostChangeStatusResponse> call = api.PostChangeStatusBy(data);
+        call.enqueue(new Callback<PostChangeStatusResponse>() {
+            @Override
+            public void onResponse(Call<PostChangeStatusResponse> call, Response<PostChangeStatusResponse> response) {
+                PostChangeStatusResponse postChangeStatusResponse = response.body();
+                if (postChangeStatusResponse != null) {
+                    if (postChangeStatusResponse.success == "true") {
+                        if (listener != null) {
+                            listener.postChangeStatus(data, postChangeStatusResponse.Message);
+                        }
+                    } else {
+                        if (listener != null) {
+                            listener.onCompleted();
+                            listener.postChangeStatusFailed(response.message());
+                        }
+                    }
+                    if (listener != null) {
+                        listener.onCompleted();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostChangeStatusResponse> call, Throwable t) {
+                if (listener != null) {
+                    listener.onCompleted();
+                    listener.postChangeStatusFailed("failed");
+                }
+            }
+        });
+
+    }
+
 }

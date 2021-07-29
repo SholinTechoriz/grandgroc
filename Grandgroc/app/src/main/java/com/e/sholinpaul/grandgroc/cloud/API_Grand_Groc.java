@@ -52,5 +52,6 @@ public interface API_Grand_Groc {
     @POST("delivary/scan_qr/orderstatus")
     Call<PostChangeStatusResponse> PostChangeStatus(@Body OrderModel data);
 
-
+    @POST("delivary/orders/changestatus")
+    Call<PostChangeStatusResponse> PostChangeStatusBy(@Body OrderModel data);
 }

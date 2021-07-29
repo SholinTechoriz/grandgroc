@@ -67,7 +67,6 @@ public class OrderDetailsActivity extends BaseActivity {
 
         if (State.equals("scanActivity")) {
             order_Id = getIntent().getStringExtra("ORDER_ID");
-            toolbarSection("#OrderID " + order_Id, true);
 
         } else {
             order_Id = String.valueOf(orderModel.getOrder_id());

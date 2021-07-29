@@ -63,6 +63,11 @@ public class OrderModel implements Parcelable {
     @SerializedName("assignordersID")
     private int assignordersID;
 
+    public  OrderModel(){
+
+    }
+
+
     protected OrderModel(Parcel in) {
         id = in.readInt();
         order_id = in.readInt();

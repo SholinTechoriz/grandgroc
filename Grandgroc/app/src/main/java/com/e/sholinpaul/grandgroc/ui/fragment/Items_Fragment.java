@@ -43,12 +43,12 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
         final String state = getArguments().getString("State");
 
 
-        if (state.equals("activestate")) {
-            Order_id = Integer.parseInt(getArguments().getString("orderscanned"));
-        } else {
+//        if (state.equals("activestate")) {
+//            Order_id = Integer.parseInt(getArguments().getString("orderscanned"));
+//        } else {
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
-        }
+//        }
 
 
         fetchAllOrderList();

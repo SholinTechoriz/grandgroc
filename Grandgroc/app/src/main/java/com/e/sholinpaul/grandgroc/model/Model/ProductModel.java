@@ -37,6 +37,10 @@ public class ProductModel  implements Parcelable {
     @SerializedName("product_image")
     private String product_image;
 
+    public  ProductModel(){
+
+    }
+
     protected ProductModel(Parcel in) {
         id = in.readInt();
         order_id = in.readInt();

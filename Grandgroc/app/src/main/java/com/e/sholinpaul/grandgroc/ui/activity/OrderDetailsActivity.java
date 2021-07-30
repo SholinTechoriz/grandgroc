@@ -24,6 +24,7 @@ public class OrderDetailsActivity extends BaseActivity {
     ActivityOrderDetailsBinding binding;
     Context mContext;
     OrderModel orderModel;
+    int id;
     String order_Id;
 
     ArrayList<Fragment> mFragmentArrayList = new ArrayList<>();
@@ -63,17 +64,19 @@ public class OrderDetailsActivity extends BaseActivity {
 
         orderModel = getIntent().getParcelableExtra("order");
 
-        String State = getIntent().hasExtra("ActivityState") ? getIntent().getStringExtra("ActivityState") : "";
+        String scanState = getIntent().hasExtra("ActivityState") ? getIntent().getStringExtra("ActivityState") : "";
 
-        if (State.equals("scanActivity")) {
+        String OrderListState = getIntent().hasExtra("OrderLIST") ? getIntent().getStringExtra("OrderLIST") : "";
+
+
+        if (scanState.equals("scanActivity")) {
             order_Id = getIntent().getStringExtra("ORDER_ID");
             toolbarSection("#OrderID " + order_Id, true);
 
 
-        } else {
+        } else if (OrderListState.equals("OrderListActivity")) {
             order_Id = String.valueOf(orderModel.getOrder_id());
             toolbarSection("#OrderID " + order_Id, true);
-
         }
 
 
@@ -81,31 +84,42 @@ public class OrderDetailsActivity extends BaseActivity {
         binding.tabs1.setupWithViewPager(binding.viewpager1);
         binding.tabs1.setTabGravity(TabLayout.GRAVITY_CENTER);
 
-        Bundle bundle1 = new Bundle();
-        bundle1.putString("orderscanned", order_Id);
-        bundle1.putString("State", "activestate");
-
-
 
         Bundle bundle = new Bundle();
+
+        bundle.putString("orderscanned", order_Id);
+        bundle.putString("ActivityState", scanState);
         bundle.putParcelable("order", orderModel);
-
-
-
+        bundle.putString("OrderLIST", OrderListState);
 
         Fragment fragment = null;
 
 
         fragment = new Items_Fragment();
         fragment.setArguments(bundle);
-        fragment.setArguments(bundle1);
+        fragment.setArguments(bundle);
         mFragmentArrayList.add(fragment);
 
 
         fragment = new LocationFragment();
         fragment.setArguments(bundle);
-        fragment.setArguments(bundle1);
+        fragment.setArguments(bundle);
         mFragmentArrayList.add(fragment);
+
+
+//        Fragment fragment = null;
+//
+//
+//        fragment = new Items_Fragment();
+//        fragment.setArguments(bundleAllOrder);
+//        fragment.setArguments(bundleScan);
+//        mFragmentArrayList.add(fragment);
+//
+//
+//        fragment = new LocationFragment();
+//        fragment.setArguments(bundleAllOrder);
+//        fragment.setArguments(bundleScan);
+//        mFragmentArrayList.add(fragment);
 
 
         binding.viewpager1.setAdapter(new TabFragmentPagerAdapter(this.getSupportFragmentManager()));

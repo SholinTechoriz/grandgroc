@@ -20,18 +20,25 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.NewOrderListListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.QRCodeFoundListener;
+import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.databinding.ActivityScannerBinding;
+import com.e.sholinpaul.grandgroc.model.Model.AllOrderModel;
+import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
+import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class ScannerActivity extends BaseActivity {
+public class ScannerActivity extends BaseActivity  {
     ActivityScannerBinding binding;
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     int convertedStoreId;
     int convertedOrderId;
-
+    ArrayList<OrderModel> orderData;
+    AllOrderModel allOrderModel;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
 
 
@@ -47,6 +54,7 @@ public class ScannerActivity extends BaseActivity {
     }
 
     private void init() {
+
         binding.activityMainQrCodeFoundButton.setVisibility(View.INVISIBLE);
         binding.activityMainQrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +62,6 @@ public class ScannerActivity extends BaseActivity {
                 Intent intent = new Intent(ScannerActivity.this, OrderDetailsActivity.class);
                 intent.putExtra("ORDER_ID", "" + qrCode);
                 intent.putExtra("ActivityState", "scanActivity");
-
                 startActivityForResult(intent, 301);
                 Log.i(ScannerActivity.class.getSimpleName(), "Data Found: " + qrCode);
 
@@ -64,6 +71,7 @@ public class ScannerActivity extends BaseActivity {
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         requestCamera();
     }
+
 
 
     private void requestCamera() {
@@ -158,6 +166,7 @@ public class ScannerActivity extends BaseActivity {
 
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, imageAnalysis, preview);
     }
+
 
 
 }

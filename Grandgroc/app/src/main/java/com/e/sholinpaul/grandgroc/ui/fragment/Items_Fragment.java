@@ -41,25 +41,22 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
+        final String ScanState = getArguments().getString("ActivityState");
+        final String AllOrdersState = getArguments().getString("OrderLIST");
 
-        final String Qr_Orderid = getArguments().getString("State");
+        if (ScanState != "scanActivity") {
+            final String OId = getArguments().getString("orderscanned");
+            Order_id = Integer.parseInt(OId);
+            id = orderModel.getId();
+            Log.d("qwerty", " Order id 1 : " + Order_id);
 
+        } else if (AllOrdersState.equals("OrderListActivity")) {
 
-        if (Qr_Orderid.equals("activestate")) {
-            final String OId=getArguments().getString("orderscanned");
-            Order_id= Integer.parseInt(OId);
-            id=1;
-
-        } else {
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
+            Log.d("qwerty", " Order id 2 : " + Order_id);
 
         }
-
-
-
-
-
 
         fetchAllOrderList();
     }
@@ -131,8 +128,8 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
 
     @Override
     public void fetchOrderDetails(OrderModel AssignedOrder, PlaceModel order, List<ProductModel> order_details) {
-
         binding.lLoading.setVisibility(View.GONE);
+        Log.d("qwertyuiop", "size ddd  item  :" + order_details.size());
         setDataToAdapter(order_details);
         setDataToAdapter1(order_details);
 

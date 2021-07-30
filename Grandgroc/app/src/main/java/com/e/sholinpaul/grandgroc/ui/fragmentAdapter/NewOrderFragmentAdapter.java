@@ -93,6 +93,7 @@ public class NewOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         final OrderModel orderModel = NewOrderList.get(holder.getAdapterPosition());
         Intent intent = new Intent(mcontext, OrderDetailsActivity.class);
         intent.putExtra("order", orderModel);
+        intent.putExtra("OrderLIST","OrderListActivity");
         ((Activity) mcontext).startActivity(intent);
 
     }

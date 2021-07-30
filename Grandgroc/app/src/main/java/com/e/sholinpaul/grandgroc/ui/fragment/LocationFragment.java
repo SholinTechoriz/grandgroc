@@ -38,19 +38,20 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
-        final String Qr_Orderid = getArguments().getString("State");
+        final String ScanState = getArguments().getString("ActivityState");
+        final String AllOrdersState = getArguments().getString("OrderLIST");
 
+        if (ScanState != "scanActivity") {
+            final String OId = getArguments().getString("orderscanned");
+            Order_id = Integer.parseInt(OId);
+            id = orderModel.getId();
+            Log.d("qwerty", " Order id 1 : " + Order_id);
 
-        if (Qr_Orderid.equals("activestate")) {
-            final String OId=getArguments().getString("orderscanned");
-            Order_id= Integer.parseInt(OId);
-            id=1;
-            Log.d("qwerty"," Order id 1 : "+Order_id);
+        } else if (AllOrdersState.equals("OrderListActivity")) {
 
-        } else {
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
-            Log.d("qwerty"," Order id 2 : "+Order_id);
+            Log.d("qwerty", " Order id 2 : " + Order_id);
 
         }
 
@@ -60,9 +61,9 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         binding.btnCollected.setOnClickListener(v -> {
 
             status = "collected";
-            if (Qr_Orderid.equals("activestate")) {
+            if (ScanState.equals("ScanState")) {
                 postChangesByScanner();
-            }else{
+            } else {
                 postChangeStatus();
 
             }
@@ -70,9 +71,9 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
         binding.btnDelivered.setOnClickListener(v -> {
             status = "delivered";
-            if (Qr_Orderid.equals("activestate")) {
+            if (ScanState.equals("ScanState")) {
                 postChangesByScanner();
-            }else{
+            } else {
                 postChangeStatus();
 
             }
@@ -81,9 +82,9 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         binding.btnCompleted.setOnClickListener(v -> {
 
             status = "completed";
-            if (Qr_Orderid.equals("activestate")) {
+            if (ScanState.equals("ScanState")) {
                 postChangesByScanner();
-            }else{
+            } else {
                 postChangeStatus();
 
             }
@@ -101,7 +102,8 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
     }
 
 
-    private void postChangesByScanner(){
+    private void postChangesByScanner() {
+        Toast.makeText(getActivity(), "scanner", Toast.LENGTH_SHORT).show();
         OrderModel orderModel = new OrderModel();
         accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
@@ -116,6 +118,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
     }
 
     private void postChangeStatus() {
+        Toast.makeText(getActivity(), "Activity", Toast.LENGTH_SHORT).show();
 
         OrderModel orderModel = new OrderModel();
         accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
@@ -149,6 +152,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         Order_id = AssignedOrder.getOrder_id();
         id = AssignedOrder.getId();
 
+        Log.d("qwertyuiop", "size  Location ddd  :" + order_details.size());
 
         status = AssignedOrder.getStatus();
         setDataToTextview(order);

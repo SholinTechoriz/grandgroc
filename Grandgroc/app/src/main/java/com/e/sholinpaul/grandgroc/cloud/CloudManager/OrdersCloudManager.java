@@ -2,11 +2,13 @@ package com.e.sholinpaul.grandgroc.cloud.CloudManager;
 
 import android.content.Context;
 
+import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.CheckAssignedOrderListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.GetOrderTypeListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.NewOrderListListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.OrderDetailsListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.PostStatusChangeListener;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
+import com.e.sholinpaul.grandgroc.model.Responses.CheckAssignedOrderResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.GetTypeListResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.NewOrderResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.OrderListResponse;
@@ -223,5 +225,49 @@ public class OrdersCloudManager extends BaseCloudManger {
         });
 
     }
+
+
+    public void CheckAssignedOrder(String device_id, String api_token, int Order_id, final CheckAssignedOrderListener listener) {
+        if (!checkConnection(listener)) {
+            return;
+        }
+        Call<CheckAssignedOrderResponse> call = api.CheckAssignedOrder(device_id, api_token, Order_id);
+        call.enqueue(new Callback<CheckAssignedOrderResponse>() {
+            @Override
+            public void onResponse(Call<CheckAssignedOrderResponse> call, Response<CheckAssignedOrderResponse> response) {
+
+                CheckAssignedOrderResponse checkAssignedOrderResponse = response.body();
+                if (checkAssignedOrderResponse != null) {
+                    if (checkAssignedOrderResponse.success == "true") {
+                        if (listener != null) {
+                            listener.fetchCheckedAssignedOrderDetails(checkAssignedOrderResponse.order, checkAssignedOrderResponse.order_details);
+                        }
+                    } else {
+                        if (listener != null) {
+                            listener.onCompleted();
+                            listener.fetchCheckAssignedOrderDetailsFailed(checkAssignedOrderResponse.success);
+                        }
+                    }
+                    if (listener != null) {
+                        listener.onCompleted();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CheckAssignedOrderResponse> call, Throwable t) {
+
+                if (listener != null) {
+                    listener.onCompleted();
+                    listener.fetchCheckAssignedOrderDetailsFailed("Failed");
+                }
+            }
+        });
+
+//        if (listener != null) {
+//            listener.onStarted();
+//        }
+    }
+
 
 }

@@ -10,7 +10,8 @@
     <RelativeLayout
         android:id="@+id/rlMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/cardview_light_background">
 
 
         <RelativeLayout
@@ -19,12 +20,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/tabroundshapebtn"
             android:backgroundTint="@color/colorUltraLightGreen"
-            android:paddingBottom="80dp">
+            android:padding="10dp">
 
             <RelativeLayout
                 android:id="@+id/rlImgSec"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp">
 
@@ -52,7 +53,7 @@
                 android:fontFamily="@font/muli_semi_bold_italic"
                 android:text="Boy1"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -63,7 +64,7 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/muli_semi_bold_italic"
                 android:text="Kozhikode"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -85,12 +86,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="210dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/roundshapebtn"
-            android:backgroundTint="@color/cardview_light_background">
+            android:layout_below="@id/rlHeader"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp">
 
             <ScrollView
                 android:id="@+id/svEmpView"
@@ -137,10 +137,10 @@
                             android:inputType="textEmailAddress"
                             android:padding="8dp"
                             android:textColor="@color/colorBlack"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
-
 
 
                     <RelativeLayout
@@ -173,6 +173,7 @@
                             android:inputType="textAutoComplete"
                             android:padding="8dp"
                             android:textColor="@color/colorBlack"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -207,6 +208,7 @@
                             android:inputType="textEmailAddress"
                             android:padding="8dp"
                             android:textColor="@color/colorBlack"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -241,6 +243,7 @@
                             android:inputType="phone"
                             android:padding="8dp"
                             android:textColor="@color/colorBlack"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -268,7 +271,6 @@
                             android:layout_toEndOf="@id/img5"
                             android:background="@drawable/roundshapebtn"
                             android:backgroundTint="@color/colorUltraLightGreen"
-
                             android:fontFamily="@font/muli_semi_bold_italic"
                             android:hint="Date"
                             android:importantForAutofill="no"
@@ -276,6 +278,7 @@
                             android:maxLength="10"
                             android:padding="8dp"
                             android:textColor="@color/colorBlack"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -303,13 +306,13 @@
                             android:layout_toEndOf="@id/img6"
                             android:background="@drawable/roundshapebtn"
                             android:backgroundTint="@color/colorUltraLightGreen"
-
                             android:fontFamily="@font/muli_semi_bold_italic"
                             android:hint="Code"
                             android:importantForAutofill="no"
                             android:inputType="none"
                             android:padding="8dp"
                             android:textColor="@color/colorBlack"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -323,11 +326,11 @@
                         android:layout_margin="6dp"
                         android:fontFamily="@font/muli_semi_bold_italic"
                         android:padding="5dp"
-                        android:visibility="gone"
                         android:text="change_password"
                         android:textColor="@color/colorBlack"
                         android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/btnUpdate"
@@ -354,9 +357,9 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
         android:visibility="gone"
         android:weightSum="2">
 

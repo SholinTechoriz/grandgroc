@@ -20,27 +20,30 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.NewOrderListListener;
+import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.CheckAssignedOrderListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.QRCodeFoundListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.databinding.ActivityScannerBinding;
 import com.e.sholinpaul.grandgroc.model.Model.AllOrderModel;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
+import com.e.sholinpaul.grandgroc.model.Model.PlaceModel;
+import com.e.sholinpaul.grandgroc.model.Model.ProductModel;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ScannerActivity extends BaseActivity  {
+public class ScannerActivity extends BaseActivity implements CheckAssignedOrderListener {
     ActivityScannerBinding binding;
     private static final int PERMISSION_REQUEST_CAMERA = 0;
-    int convertedStoreId;
-    int convertedOrderId;
+    String accessToken;
+    String deviceId;
     ArrayList<OrderModel> orderData;
     AllOrderModel allOrderModel;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
-
+    int page = 1;
 
     private String qrCode;
 
@@ -59,19 +62,23 @@ public class ScannerActivity extends BaseActivity  {
         binding.activityMainQrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScannerActivity.this, OrderDetailsActivity.class);
-                intent.putExtra("ORDER_ID", "" + qrCode);
-                intent.putExtra("ActivityState", "scanActivity");
-                startActivityForResult(intent, 301);
-                Log.i(ScannerActivity.class.getSimpleName(), "Data Found: " + qrCode);
+                if (qrCode.isEmpty()) {
+                    showMessage("Data not found");
+                } else {
+                    fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+
+                    Log.i(ScannerActivity.class.getSimpleName(), "Data Found: " + qrCode);
+                }
+
 
             }
         });
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         requestCamera();
-    }
 
+
+    }
 
 
     private void requestCamera() {
@@ -131,8 +138,6 @@ public class ScannerActivity extends BaseActivity  {
             @Override
             public void onQRCodeFound(String _qrCode) {
                 qrCode = _qrCode;
-
-
 //                StringTokenizer tokens = new StringTokenizer(_qrCode, "|");
 //
 //                //////////////Order id///////////
@@ -152,7 +157,6 @@ public class ScannerActivity extends BaseActivity  {
 //                String secondData2 = secondData.nextToken();
 //
 //                convertedStoreId = Integer.parseInt(secondData2);
-
                 binding.activityMainQrCodeFoundButton.setVisibility(View.VISIBLE);
 
 
@@ -168,5 +172,26 @@ public class ScannerActivity extends BaseActivity  {
     }
 
 
+    private void fetchCheckAssignedOrder(int Order_id) {
+        accessToken = BusinessDetailsGenerator.getInstance(this).getApi_token();
+        deviceId = BusinessDetailsGenerator.getInstance(this).getDeviceId();
+        OrdersCloudManager orderListCloudManager = new OrdersCloudManager(this);
+        orderListCloudManager.CheckAssignedOrder(deviceId, accessToken, Order_id, this);
+    }
 
+
+    @Override
+    public void fetchCheckedAssignedOrderDetails(PlaceModel order, List<ProductModel> order_details) {
+
+        Toast.makeText(this, "Successfully Verified", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(ScannerActivity.this, OrderDetailsActivity.class);
+//        intent.putExtra("ORDER_ID", "" + qrCode);
+//        intent.putExtra("ActivityState", "scanActivity");
+//        startActivityForResult(intent, 301);
+    }
+
+    @Override
+    public void fetchCheckAssignedOrderDetailsFailed(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
 }

@@ -1,7 +1,7 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,53 +41,61 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         final String ScanState = getArguments().getString("ActivityState");
         final String AllOrdersState = getArguments().getString("OrderLIST");
 
-        if (ScanState != "scanActivity") {
-            final String OId = getArguments().getString("orderscanned");
-            Order_id = Integer.parseInt(OId);
-            id = orderModel.getId();
-            Log.d("qwerty", " Order id 1 : " + Order_id);
 
-        } else if (AllOrdersState.equals("OrderListActivity")) {
+//        if (ScanState.equals("scanActivity")) {
+//
+//            Toast.makeText(getActivity(), " from Scanning Activity", Toast.LENGTH_SHORT).show();
+//            final String OId = getArguments().getString("orderscanned");
+//            final String ID = getArguments().getString("ID");
+//
+//            Order_id = Integer.parseInt(OId);
+//            id = Integer.parseInt(ID);
+//
+////            fetchAllOrderList();
+//
+//        } else
 
+            if (AllOrdersState.equals("OrderListActivity")) {
+
+
+            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
-            Log.d("qwerty", " Order id 2 : " + Order_id);
+            fetchAllOrderList();
 
         }
 
 
-        fetchAllOrderList();
-
         binding.btnCollected.setOnClickListener(v -> {
 
             status = "collected";
-            if (ScanState.equals("ScanState")) {
-                postChangesByScanner();
-            } else {
+//            if (ScanState.equals("ScanState")) {
+//                postChangesByScanner();
+//            } else {
                 postChangeStatus();
 
-            }
+//            }
         });
 
         binding.btnDelivered.setOnClickListener(v -> {
             status = "delivered";
-            if (ScanState.equals("ScanState")) {
-                postChangesByScanner();
-            } else {
+//            if (ScanState.equals("ScanState")) {
+//                postChangesByScanner();
+//            } else {
                 postChangeStatus();
 
-            }
+//            }
         });
 
         binding.btnCompleted.setOnClickListener(v -> {
 
             status = "completed";
-            if (ScanState.equals("ScanState")) {
-                postChangesByScanner();
-            } else {
+//            if (ScanState.equals("ScanState")) {
+//                postChangesByScanner();
+//            } else {
                 postChangeStatus();
 
-            }
+//            }
         });
     }
 
@@ -97,7 +105,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
         OrdersCloudManager ordersCloudManager = new OrdersCloudManager(getActivity());
         ordersCloudManager.fetchAllOrdersList(deviceId, accessToken, id, Order_id, this);
-//        binding.lLoading.setVisibility(View.VISIBLE);
+
 
     }
 
@@ -151,44 +159,68 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
         Order_id = AssignedOrder.getOrder_id();
         id = AssignedOrder.getId();
-
-        Log.d("qwertyuiop", "size  Location ddd  :" + order_details.size());
-
         status = AssignedOrder.getStatus();
+
         setDataToTextview(order);
 
 
-        if (status.equals("collected")) {
-            binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorAlphaRed));
-            binding.btnCollected.setTextColor(getResources().getColor(R.color.colorWhite));
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_green_tick);
 
-            binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
-            binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorBlack));
-            binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
-            binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorBlack));
+        switch (status) {
 
-        } else if (status.equals("completed")) {
-            binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorAlphaRed));
-            binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorWhite));
+            case "delivered":
+                binding.btnDelivered.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
+                binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-            binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
-            binding.btnCollected.setTextColor(getResources().getColor(R.color.colorBlack));
+                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorWhite));
 
-            binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
-            binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorBlack));
+                binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCollected.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
 
-        } else if (status.equals("delivered")) {
-            binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorAlphaRed));
-            binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorWhite));
 
-            binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
-            binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorBlack));
-            binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
-            binding.btnCollected.setTextColor(getResources().getColor(R.color.colorBlack));
+            case "collected":
+
+                binding.btnCollected.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+                binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                binding.btnCollected.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorWhite));
+
+                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+
+
+            case "completed":
+                binding.btnCompleted.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
+                binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCollected.setTextColor(getResources().getColor(R.color.colorWhite));
+
+                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+
+            default:
+
+                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorWhite));
+
+
+                binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCollected.setTextColor(getResources().getColor(R.color.colorWhite));
+
+
+                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorWhite));
 
         }
-
-
     }
 
     @Override
@@ -212,14 +244,10 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        fetchAllOrderList();
-    }
-
-    @Override
     public void postChangeStatus(OrderModel data, String Message) {
         Toast.makeText(getActivity(), Message, Toast.LENGTH_SHORT).show();
+        fetchAllOrderList();
+
 
     }
 

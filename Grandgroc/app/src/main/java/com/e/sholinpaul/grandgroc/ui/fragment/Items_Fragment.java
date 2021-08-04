@@ -1,10 +1,10 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -41,24 +41,20 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
-        final String ScanState = getArguments().getString("ActivityState");
+//        final String ScanState = getArguments().getString("ActivityState");
         final String AllOrdersState = getArguments().getString("OrderLIST");
 
-        if (ScanState != "scanActivity") {
-            final String OId = getArguments().getString("orderscanned");
-            Order_id = Integer.parseInt(OId);
-            id = orderModel.getId();
-            Log.d("qwerty", " Order id 1 : " + Order_id);
+// 
 
-        } else if (AllOrdersState.equals("OrderListActivity")) {
+            if (AllOrdersState.equals("OrderListActivity")) {
+            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
 
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
-            Log.d("qwerty", " Order id 2 : " + Order_id);
 
+            fetchAllOrderList();
         }
 
-        fetchAllOrderList();
     }
 
     private void fetchAllOrderList() {
@@ -129,7 +125,7 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
     @Override
     public void fetchOrderDetails(OrderModel AssignedOrder, PlaceModel order, List<ProductModel> order_details) {
         binding.lLoading.setVisibility(View.GONE);
-        Log.d("qwertyuiop", "size ddd  item  :" + order_details.size());
+
         setDataToAdapter(order_details);
         setDataToAdapter1(order_details);
 

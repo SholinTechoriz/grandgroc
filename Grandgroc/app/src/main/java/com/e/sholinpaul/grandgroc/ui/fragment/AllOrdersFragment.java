@@ -20,7 +20,7 @@ import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.databinding.FragmentAllOrdersBinding;
 import com.e.sholinpaul.grandgroc.model.Model.AllOrderModel;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
-import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.NewOrderFragmentAdapter;
+import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.AllOrderFragmentAdapter;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ import java.util.List;
 public class AllOrdersFragment extends Fragment implements NewOrderListListener, GetOrderTypeListener {
 
     private FragmentAllOrdersBinding binding;
-
+    AllOrdersFragment fragment;
     String accessToken;
     String deviceId;
     String spinnerData;
@@ -40,7 +40,7 @@ public class AllOrdersFragment extends Fragment implements NewOrderListListener,
     List<OrderModel> OrderTypesModel;
     AllOrderModel allOrderModel;
     ArrayList<OrderModel> orderData;
-    NewOrderFragmentAdapter adapter;
+    AllOrderFragmentAdapter adapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -97,7 +97,7 @@ public class AllOrdersFragment extends Fragment implements NewOrderListListener,
                 @Override
                 public void run() {
 
-                    adapter = new NewOrderFragmentAdapter(data, getActivity());
+                    adapter = new AllOrderFragmentAdapter(data, getActivity(), fragment);
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
                     binding.rvAllOrders.setLayoutManager(gridLayoutManager);
                     binding.rvAllOrders.setAdapter(adapter);

@@ -10,6 +10,7 @@ import com.e.sholinpaul.grandgroc.model.Responses.OrderListResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.PostChangeStatusResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.ProfileResponse;
 import com.e.sholinpaul.grandgroc.model.Responses.UpdateUserProfileResponse;
+import com.e.sholinpaul.grandgroc.model.Responses.CheckAssignedOrderResponse;
 
 import java.util.Map;
 
@@ -54,4 +55,7 @@ public interface API_Grand_Groc {
 
     @POST("delivary/orders/changestatus")
     Call<PostChangeStatusResponse> PostChangeStatusBy(@Body OrderModel data);
+
+    @GET("delivary/check_assignedorder")
+    Call<CheckAssignedOrderResponse> CheckAssignedOrder(@Query("device_id") String device_id, @Query("api_token") String api_token, @Query("Order_id") int Order_id);
 }

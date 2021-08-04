@@ -1,6 +1,5 @@
 package com.e.sholinpaul.grandgroc.ui.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,20 +11,26 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.e.sholinpaul.grandgroc.R;
+import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.NewOrderListListener;
+import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.databinding.ActivityOrderDetailsBinding;
+import com.e.sholinpaul.grandgroc.model.Model.AllOrderModel;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.ui.fragment.Items_Fragment;
 import com.e.sholinpaul.grandgroc.ui.fragment.LocationFragment;
+import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class OrderDetailsActivity extends BaseActivity {
+public class OrderDetailsActivity extends BaseActivity implements NewOrderListListener {
     ActivityOrderDetailsBinding binding;
-    Context mContext;
     OrderModel orderModel;
-    int id;
     String order_Id;
+    int page = 1;
+    String oID;
+    String Id;
+    ArrayList<OrderModel> orderData;
 
     ArrayList<Fragment> mFragmentArrayList = new ArrayList<>();
 
@@ -35,15 +40,14 @@ public class OrderDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOrderDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        setContentView(view);
+         setContentView(view);
         init();
     }
 
     private void init() {
-
+        fetchNewOrderFromServer(page);
         setupViewPager();
         CustomTabView();
-
     }
 
 
@@ -64,17 +68,19 @@ public class OrderDetailsActivity extends BaseActivity {
 
         orderModel = getIntent().getParcelableExtra("order");
 
-        String scanState = getIntent().hasExtra("ActivityState") ? getIntent().getStringExtra("ActivityState") : "";
+//        String scanState = getIntent().hasExtra("ActivityState") ? getIntent().getStringExtra("ActivityState") : "";
 
         String OrderListState = getIntent().hasExtra("OrderLIST") ? getIntent().getStringExtra("OrderLIST") : "";
 
 
-        if (scanState.equals("scanActivity")) {
-            order_Id = getIntent().getStringExtra("ORDER_ID");
-            toolbarSection("#OrderID " + order_Id, true);
+//        if (scanState.equals("scanActivity")) {
+//            order_Id = getIntent().getStringExtra("ORDER_ID");
+//            toolbarSection("#OrderID " + order_Id, true);
+//
+//
+//        } else
 
-
-        } else if (OrderListState.equals("OrderListActivity")) {
+        if (OrderListState.equals("OrderListActivity")) {
             order_Id = String.valueOf(orderModel.getOrder_id());
             toolbarSection("#OrderID " + order_Id, true);
         }
@@ -88,7 +94,10 @@ public class OrderDetailsActivity extends BaseActivity {
         Bundle bundle = new Bundle();
 
         bundle.putString("orderscanned", order_Id);
-        bundle.putString("ActivityState", scanState);
+//        bundle.putString("ActivityState", scanState);
+        bundle.putString("ID", Id);
+
+
         bundle.putParcelable("order", orderModel);
         bundle.putString("OrderLIST", OrderListState);
 
@@ -105,21 +114,6 @@ public class OrderDetailsActivity extends BaseActivity {
         fragment.setArguments(bundle);
         fragment.setArguments(bundle);
         mFragmentArrayList.add(fragment);
-
-
-//        Fragment fragment = null;
-//
-//
-//        fragment = new Items_Fragment();
-//        fragment.setArguments(bundleAllOrder);
-//        fragment.setArguments(bundleScan);
-//        mFragmentArrayList.add(fragment);
-//
-//
-//        fragment = new LocationFragment();
-//        fragment.setArguments(bundleAllOrder);
-//        fragment.setArguments(bundleScan);
-//        mFragmentArrayList.add(fragment);
 
 
         binding.viewpager1.setAdapter(new TabFragmentPagerAdapter(this.getSupportFragmentManager()));
@@ -158,7 +152,6 @@ public class OrderDetailsActivity extends BaseActivity {
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -166,6 +159,30 @@ public class OrderDetailsActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void fetchNewOrderFromServer(int page) {
+        String accessToken = BusinessDetailsGenerator.getInstance(this).getApi_token();
+        String deviceId = BusinessDetailsGenerator.getInstance(this).getDeviceId();
+        OrdersCloudManager orderListCloudManager = new OrdersCloudManager(this);
+        orderListCloudManager.fetchNewOrders(accessToken, deviceId, "assigned", page, this);
+    }
+
+    @Override
+    public void fetchNewOrder(AllOrderModel Assigned_orders) {
+        orderData = Assigned_orders.getData();
+        for (int i = 0; i < orderData.size(); i++) {
+            oID = String.valueOf(orderData.get(i).getOrder_id());
+            if (order_Id.equals(oID)) {
+                Id = String.valueOf(orderData.get(i).getId()); //id is send as  a String it will be converted back in fragment
+            }
+        }
+    }
+
+    @Override
+    public void fetchNewOrderListFailed(String errorMessage) {
+
     }
 
 }

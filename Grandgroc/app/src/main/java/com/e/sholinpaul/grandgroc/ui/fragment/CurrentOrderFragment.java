@@ -18,6 +18,7 @@ import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.NewOrderListListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.model.Model.AllOrderModel;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
+import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.CurrentOrderFragmentAdapter;
 import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.NewOrderFragmentAdapter;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 
@@ -29,7 +30,8 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
     View view;
     String accessToken;
     String deviceId;
-    NewOrderFragmentAdapter adapter;
+    CurrentOrderFragment fragment;
+    CurrentOrderFragmentAdapter adapter;
     ArrayList<OrderModel> orderData;
     AllOrderModel allOrderModel;
     RecyclerView rvCurrentOrder;
@@ -87,7 +89,7 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
                 @Override
                 public void run() {
 
-                    adapter = new NewOrderFragmentAdapter(data, getActivity());
+                    adapter = new CurrentOrderFragmentAdapter(data, getActivity(),fragment);
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
                     rvCurrentOrder.setLayoutManager(gridLayoutManager);
                     rvCurrentOrder.setAdapter(adapter);

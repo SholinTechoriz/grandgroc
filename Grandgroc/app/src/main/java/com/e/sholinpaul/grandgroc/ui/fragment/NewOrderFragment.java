@@ -35,6 +35,7 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
     ArrayList<OrderModel> orderData;
     AllOrderModel allOrderModel;
     NewOrderFragmentAdapter adapter;
+    NewOrderFragment fragment;
     RecyclerView rvNewOrder;
     RelativeLayout schListNotFound;
     LinearLayout lLoading;
@@ -87,7 +88,7 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
                 @Override
                 public void run() {
 
-                    adapter = new NewOrderFragmentAdapter(data, getActivity());
+                    adapter = new NewOrderFragmentAdapter(data, getActivity(), fragment);
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
                     rvNewOrder.setLayoutManager(gridLayoutManager);
                     rvNewOrder.setAdapter(adapter);
@@ -137,12 +138,6 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        fetchNewOrderFromServer(page);
-    }
-
-    @Override
     public void fetchNewOrder(AllOrderModel Assigned_orders) {
         orderData = Assigned_orders.getData();
         allOrderModel = Assigned_orders;
@@ -162,13 +157,7 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
     private void attachMoreData() {
         page++;
         fetchNewOrderFromServer(page);
-    }
 
-
-    public void checkType(ArrayList<String> Ordertypes, final int Position) {
-        for (int i = 0; i < OrderTypesModel.size(); i++) {
-            Ordertypes.add(OrderTypesModel.get(i).getType());
-        }
     }
 
 
@@ -180,11 +169,12 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
 
     @Override
     public void fetchOrderTypes(String message, List<OrderModel> deliverytypes) {
-        Log.d("asdfg", " type size  :" + deliverytypes.size());
+//        Log.d("asdfg", " type size  :" + deliverytypes.size());
 
         OrderTypesModel = new ArrayList<>();
         TypeList = new ArrayList<>();
         OrderTypesModel.addAll(deliverytypes);
+//        Log.d("asdfg", " type size  :" + OrderTypesModel.size());
 
     }
 

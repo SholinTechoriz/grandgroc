@@ -3,7 +3,6 @@ package com.e.sholinpaul.grandgroc.ui.fragmentAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +14,22 @@ import com.e.sholinpaul.grandgroc.R;
 import com.e.sholinpaul.grandgroc.databinding.SingleneworderlayoutBinding;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.ui.activity.OrderDetailsActivity;
+import com.e.sholinpaul.grandgroc.ui.fragment.CurrentOrderFragment;
 import com.e.sholinpaul.grandgroc.ui.fragment.NewOrderFragment;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class NewOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CurrentOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<OrderModel> NewOrderList;
     private Context mcontext;
-    NewOrderFragment fragment;
+    CurrentOrderFragment fragment;
 
     private final int VIEW_TYPE_ITEM = 1;
     private final int VIEW_TYPE_FOOTER = 0;
 
-    public NewOrderFragmentAdapter(ArrayList<OrderModel> newOrderList, Context mcontext, NewOrderFragment fragment) {
+    public CurrentOrderFragmentAdapter(ArrayList<OrderModel> newOrderList, Context mcontext, CurrentOrderFragment fragment) {
         NewOrderList = newOrderList;
         this.mcontext = mcontext;
         this.fragment = fragment;
@@ -63,9 +63,6 @@ public class NewOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((MyViewHolder) holder).binding.tvProductId.setText("#" + orderModel.getOrder_id());
             ((MyViewHolder) holder).binding.tvLocation.setText(orderModel.getLocation());
             ((MyViewHolder) holder).binding.tvDeliveryType.setText(orderModel.getType());
-
-
-
 
 
             if (orderModel.getDelivarytype().equals("Normal")) {

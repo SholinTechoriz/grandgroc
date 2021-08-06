@@ -1,14 +1,14 @@
-plugins {
-    id 'com.android.application'
-}
+apply plugin: 'com.android.application'
 
+'com.google.gms.google-services'
+'com.google.firebase.crashlytics'
 android {
-    compileSdkVersion 30
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.e.sholinpaul.grandgroc"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -53,14 +53,21 @@ dependencies {
 
     // qrcode reader
     implementation 'com.google.zxing:core:3.3.0'
-
-
+    implementation 'com.google.guava:guava:29.0-android'
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
+
+
+    //Firebase Integration
+    implementation 'com.google.gms:google-services:4.3.8'
+//    implementation 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+    implementation platform('com.google.firebase:firebase-bom:28.3.0')
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
 
 
     testImplementation 'junit:junit:4.+'

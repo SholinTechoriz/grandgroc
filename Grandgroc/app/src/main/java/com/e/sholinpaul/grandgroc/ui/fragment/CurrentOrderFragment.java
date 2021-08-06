@@ -35,7 +35,7 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
     ArrayList<OrderModel> orderData;
     AllOrderModel allOrderModel;
     RecyclerView rvCurrentOrder;
-    RelativeLayout schListNotFound;
+    RelativeLayout schListNotFound,rlCMain;
     LinearLayout lLoading;
     int page = 1;
 
@@ -51,6 +51,7 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
         orderData = new ArrayList<>();
         rvCurrentOrder = view.findViewById(R.id.rvCurrentOrder);
         schListNotFound = view.findViewById(R.id.schListNotFound);
+        rlCMain=view.findViewById(R.id.rlCMain);
         lLoading = view.findViewById(R.id.lLoading);
         fetchCurrentOrderFromServer(page);
         rvCurrentOrder.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -75,6 +76,11 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
         OrdersCloudManager orderListCloudManager = new OrdersCloudManager(getActivity());
         orderListCloudManager.fetchNewOrders(accessToken, deviceId, "collected", page, this);
+
+        for (int i = 0; i < rlCMain.getChildCount(); i++) {
+            View view = rlCMain.getChildAt(i);
+            enableDisableView(view, false);
+        }
         lLoading.setVisibility(View.VISIBLE);
 
     }
@@ -134,6 +140,10 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
             adapter.addAll(orderData);
             adapter.notifyDataSetChanged();
         }
+        for (int i = 0; i < rlCMain.getChildCount(); i++) {
+            View view = rlCMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         lLoading.setVisibility(View.GONE);
     }
 
@@ -144,7 +154,24 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
 
     @Override
     public void fetchNewOrderListFailed(String errorMessage) {
+        for (int i = 0; i < rlCMain.getChildCount(); i++) {
+            View view = rlCMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         lLoading.setVisibility(View.GONE);
 
+    }
+
+
+
+    public static void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+
+            for (int idx = 0; idx < group.getChildCount(); idx++) {
+                enableDisableView(group.getChildAt(idx), enabled);
+            }
+        }
     }
 }

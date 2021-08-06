@@ -38,7 +38,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
-        final String ScanState = getArguments().getString("ActivityState");
+//        final String ScanState = getArguments().getString("ActivityState");
         final String AllOrdersState = getArguments().getString("OrderLIST");
 
 
@@ -106,7 +106,10 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         OrdersCloudManager ordersCloudManager = new OrdersCloudManager(getActivity());
         ordersCloudManager.fetchAllOrdersList(deviceId, accessToken, id, Order_id, this);
 
-
+        for (int i = 0; i < binding.rlLMain.getChildCount(); i++) {
+            View view = binding.rlLMain.getChildAt(i);
+            enableDisableView(view, false);
+        }
     }
 
 
@@ -139,6 +142,11 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         OrdersCloudManager ordersCloudManager = new OrdersCloudManager(getActivity());
         ordersCloudManager.PostChangeStatusBy(orderModel, this);
 
+        for (int i = 0; i < binding.rlLMain.getChildCount(); i++) {
+            View view = binding.rlLMain.getChildAt(i);
+            enableDisableView(view, false);
+        }
+
     }
 
 
@@ -170,7 +178,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
             case "delivered":
                 binding.btnDelivered.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
+                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                 binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -197,7 +205,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
             case "completed":
                 binding.btnCompleted.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorUltraLightGreen));
+                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                 binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -221,11 +229,21 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
                 binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorWhite));
 
         }
+
+
+        for (int i = 0; i < binding.rlLMain.getChildCount(); i++) {
+            View view = binding.rlLMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
     }
 
     @Override
     public void fetchOrderDetailsFailed(String errorMessage) {
 
+        for (int i = 0; i < binding.rlLMain.getChildCount(); i++) {
+            View view = binding.rlLMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
     }
 
     @Override
@@ -246,6 +264,10 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
     @Override
     public void postChangeStatus(OrderModel data, String Message) {
         Toast.makeText(getActivity(), Message, Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < binding.rlLMain.getChildCount(); i++) {
+            View view = binding.rlLMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         fetchAllOrderList();
 
 
@@ -254,6 +276,20 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
     @Override
     public void postChangeStatusFailed(String errorMsg) {
         Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < binding.rlLMain.getChildCount(); i++) {
+            View view = binding.rlLMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
+    }
 
+    public static void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+
+            for (int idx = 0; idx < group.getChildCount(); idx++) {
+                enableDisableView(group.getChildAt(idx), enabled);
+            }
+        }
     }
 }

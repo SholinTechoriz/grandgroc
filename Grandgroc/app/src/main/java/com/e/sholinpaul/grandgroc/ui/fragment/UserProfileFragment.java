@@ -56,6 +56,8 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
     private String sImagePath = "";
     private static final int ACT_FINISH_CODE = 302;
     private static final int SELECT_PROFILE_PIC_REQUEST_CODE = 303;
+    float BUTTON_ALPHA_VALUE_ENABLE = 1f;
+    float BUTTON_ALPHA_VALUE_DISABLE = 0.6f;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
     }
 
     private void init() {
+
 
         fetchProfile();
         binding.fabProfile.setOnClickListener(view -> {
@@ -169,6 +172,14 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
         map.put("phone", phone);
         ProfileCloudManager profileCloudManager = new ProfileCloudManager(getActivity());
         profileCloudManager.updateProfileMulti(profilePicUpload, map, this);
+
+        binding.btnUpdate.setAlpha(BUTTON_ALPHA_VALUE_DISABLE);
+
+        for (int i = 0; i < binding.rlMain.getChildCount(); i++) {
+            View view = binding.rlMain.getChildAt(i);
+            enableDisableView(view, false);
+        }
+
         binding.lLoading.setVisibility(View.VISIBLE);
 
     }
@@ -401,12 +412,14 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
         setDataToEdit(model);
 
         setDataToTextview(model);
+
         binding.lLoading.setVisibility(View.GONE);
 
     }
 
     @Override
     public void fetchProfileDetailsFailed(String errorMessage) {
+
         binding.lLoading.setVisibility(View.GONE);
 
     }
@@ -430,6 +443,12 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
     public void updateProfileDetails(LoginModel delivaryboy, String message) {
         fetchProfile();
         Toast.makeText(getActivity(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+        binding.btnUpdate.setAlpha(BUTTON_ALPHA_VALUE_ENABLE);
+
+        for (int i = 0; i < binding.rlMain.getChildCount(); i++) {
+            View view = binding.rlMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         binding.lLoading.setVisibility(View.GONE);
 
 
@@ -437,7 +456,12 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
 
     @Override
     public void updateProfileDetailsFailed(String errorMsg, String message) {
+        binding.btnUpdate.setAlpha(BUTTON_ALPHA_VALUE_ENABLE);
 
+        for (int i = 0; i < binding.rlMain.getChildCount(); i++) {
+            View view = binding.rlMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         binding.lLoading.setVisibility(View.GONE);
 
     }
@@ -454,6 +478,17 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
     @Override
     public void ChangePasswordFailed(String errorMsg, String errorMessage) {
         binding.lLoading.setVisibility(View.GONE);
+    }
+
+    public static void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+
+            for (int idx = 0; idx < group.getChildCount(); idx++) {
+                enableDisableView(group.getChildAt(idx), enabled);
+            }
+        }
     }
 }
 

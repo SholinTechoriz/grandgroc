@@ -35,8 +35,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="098509" />
-                            <entry key="outputName" value="ic_green_tick" />
-                            <entry key="sourceFile" value="C:\Users\computer\Desktop\grandgroc project details\green-tick.svg" />
+                            <entry key="outputName" value="ic_close_button" />
+                            <entry key="sourceFile" value="C:\Users\computer\Desktop\grandgroc project details\close-button.svg" />
                           </map>
                         </option>
                       </PersistentState>

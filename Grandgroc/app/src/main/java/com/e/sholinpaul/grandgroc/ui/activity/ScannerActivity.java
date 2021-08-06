@@ -1,7 +1,6 @@
 package com.e.sholinpaul.grandgroc.ui.activity;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,7 +73,12 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
             }
         });
 
+        binding.btnCloseScanner.setOnClickListener(view -> {
+            finish();
+        });
+
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+
         requestCamera();
 
 

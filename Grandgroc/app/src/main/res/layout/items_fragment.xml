@@ -7,11 +7,10 @@
     tools:context=".ui.fragment.Items_Fragment">
 
     <RelativeLayout
+        android:id="@+id/rlIMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
-
-
 
         <RelativeLayout
             android:id="@+id/rlItemList"
@@ -61,7 +60,7 @@
             android:id="@+id/lLoading"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
+     android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal"
             android:visibility="visible"
@@ -73,7 +72,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="10dp"
-                android:indeterminateTint="@color/colorGrey"
+                android:indeterminateTint="@color/colorPrimary"
                 android:visibility="visible" />
 
             <TextView
@@ -147,11 +146,6 @@
 
 
         </RelativeLayout>
-
-
-
-
-
 
     </RelativeLayout>
 </RelativeLayout>

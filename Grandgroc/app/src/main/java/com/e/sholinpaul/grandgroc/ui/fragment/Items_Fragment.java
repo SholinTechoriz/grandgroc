@@ -63,6 +63,11 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
         OrdersCloudManager ordersCloudManager = new OrdersCloudManager(getActivity());
         ordersCloudManager.fetchAllOrdersList(deviceId, accessToken, id, Order_id, this);
+        for (int i = 0; i < binding.rlIMain.getChildCount(); i++) {
+            View view = binding.rlIMain.getChildAt(i);
+            enableDisableView(view, false);
+        }
+
         binding.lLoading.setVisibility(View.VISIBLE);
 
     }
@@ -124,17 +129,38 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
 
     @Override
     public void fetchOrderDetails(OrderModel AssignedOrder, PlaceModel order, List<ProductModel> order_details) {
+        for (int i = 0; i < binding.rlIMain.getChildCount(); i++) {
+            View view = binding.rlIMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         binding.lLoading.setVisibility(View.GONE);
 
         setDataToAdapter(order_details);
         setDataToAdapter1(order_details);
 
+
     }
 
     @Override
     public void fetchOrderDetailsFailed(String errorMessage) {
+        for (int i = 0; i < binding.rlIMain.getChildCount(); i++) {
+            View view = binding.rlIMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         binding.lLoading.setVisibility(View.GONE);
 
+    }
+
+
+    public static void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+
+            for (int idx = 0; idx < group.getChildCount(); idx++) {
+                enableDisableView(group.getChildAt(idx), enabled);
+            }
+        }
     }
 
     @Override

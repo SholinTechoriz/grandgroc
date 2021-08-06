@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "427009109639",
+    "project_id": "grandgroc-4d267",
+    "storage_bucket": "grandgroc-4d267.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427009109639:android:ded3a3b0c3771460dd9222",
+        "android_client_info": {
+          "package_name": "com.e.sholinpaul.grandgroc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "427009109639-gquhdiflijpjsgck8mndqobqnm7md2bo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAInuSKbllFCygjVyZ-iFoo62hYgRu0ob4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "427009109639-gquhdiflijpjsgck8mndqobqnm7md2bo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

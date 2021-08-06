@@ -20,7 +20,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/tabroundshapebtn"
             android:backgroundTint="@color/colorUltraLightGreen"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="30dp">
 
             <RelativeLayout
                 android:id="@+id/rlImgSec"
@@ -164,6 +167,7 @@
                             android:id="@+id/edLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
                             android:layout_toEndOf="@id/img2"
                             android:background="@drawable/roundshapebtn"
                             android:backgroundTint="@color/colorUltraLightGreen"
@@ -356,7 +360,7 @@
         android:id="@+id/lLoading"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:orientation="horizontal"
@@ -379,7 +383,7 @@
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:text="@string/wait_for_a_moment"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="14sp" />
 
     </LinearLayout>

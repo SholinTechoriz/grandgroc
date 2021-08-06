@@ -37,7 +37,7 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
     NewOrderFragmentAdapter adapter;
     NewOrderFragment fragment;
     RecyclerView rvNewOrder;
-    RelativeLayout schListNotFound;
+    RelativeLayout schListNotFound,rlMain;
     LinearLayout lLoading;
     int page = 1;
 
@@ -56,6 +56,7 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
         orderData = new ArrayList<>();
         rvNewOrder = view.findViewById(R.id.rvNewOrder);
         schListNotFound = view.findViewById(R.id.schListNotFound);
+        rlMain=view.findViewById(R.id.rlMain);
         lLoading = view.findViewById(R.id.lLoading);
         fetchNewOrderFromServer(page);
         fetchOrderTypes();
@@ -110,6 +111,11 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
         OrdersCloudManager orderListCloudManager = new OrdersCloudManager(getActivity());
         orderListCloudManager.fetchNewOrders(accessToken, deviceId, "assigned", page, this);
+        for (int i = 0; i < rlMain.getChildCount(); i++) {
+            View view = rlMain.getChildAt(i);
+            enableDisableView(view, false);
+        }
+
         lLoading.setVisibility(View.VISIBLE);
     }
 
@@ -150,6 +156,11 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
             adapter.notifyDataSetChanged();
         }
 
+        for (int i = 0; i < rlMain.getChildCount(); i++) {
+            View view = rlMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
+
         lLoading.setVisibility(View.GONE);
 
     }
@@ -163,6 +174,10 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
 
     @Override
     public void fetchNewOrderListFailed(String errorMessage) {
+        for (int i = 0; i < rlMain.getChildCount(); i++) {
+            View view = rlMain.getChildAt(i);
+            enableDisableView(view, true);
+        }
         lLoading.setVisibility(View.GONE);
 
     }
@@ -181,5 +196,16 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
     @Override
     public void fetchOrderTypesFailed(String errorMessage) {
 
+    }
+
+    public static void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+
+            for (int idx = 0; idx < group.getChildCount(); idx++) {
+                enableDisableView(group.getChildAt(idx), enabled);
+            }
+        }
     }
 }

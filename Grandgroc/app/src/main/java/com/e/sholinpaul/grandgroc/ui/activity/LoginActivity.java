@@ -83,12 +83,9 @@ public class LoginActivity extends BaseActivity implements LoginListener {
         loginCloudManager.fetchLogin(loginModel, this);
 
         binding.btnSignIn.setText(R.string.logging);
-        binding.btnSignIn.setAlpha(BUTTON_ALPHA_VALUE_ENABLE);
+        binding.btnSignIn.setAlpha(BUTTON_ALPHA_VALUE_DISABLE);
 
-        for (int i = 0; i < binding.rlMainLogin.getChildCount(); i++) {
-            View view = binding.rlMainLogin.getChildAt(i);
-            enableDisableView(view, false);
-        }
+
     }
 
     public static void enableDisableView(View view, boolean enabled) {
@@ -108,6 +105,11 @@ public class LoginActivity extends BaseActivity implements LoginListener {
         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
         startActivity(intent);
         finish();
+        binding.btnSignIn.setAlpha(BUTTON_ALPHA_VALUE_ENABLE);
+        for (int i = 0; i < binding.rlMainLogin.getChildCount(); i++) {
+            View view = binding.rlMainLogin.getChildAt(i);
+            enableDisableView(view, true);
+        }
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
 
         Log.d("qwerty", " data iss  :" + delivery_details.getEmail());

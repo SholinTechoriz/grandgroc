@@ -55,10 +55,10 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 //
 //        } else
 
-            if (AllOrdersState.equals("OrderListActivity")) {
+        if (AllOrdersState.equals("OrderListActivity")) {
 
 
-            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
             fetchAllOrderList();
@@ -72,7 +72,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 //            if (ScanState.equals("ScanState")) {
 //                postChangesByScanner();
 //            } else {
-                postChangeStatus();
+            postChangeStatus();
 
 //            }
         });
@@ -82,7 +82,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 //            if (ScanState.equals("ScanState")) {
 //                postChangesByScanner();
 //            } else {
-                postChangeStatus();
+            postChangeStatus();
 
 //            }
         });
@@ -93,7 +93,7 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 //            if (ScanState.equals("ScanState")) {
 //                postChangesByScanner();
 //            } else {
-                postChangeStatus();
+            postChangeStatus();
 
 //            }
         });

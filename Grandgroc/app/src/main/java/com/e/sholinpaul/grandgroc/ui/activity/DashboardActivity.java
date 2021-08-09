@@ -112,6 +112,8 @@ public class DashboardActivity extends AppCompatActivity {
             editor.clear();
             editor.apply();
 
+            Intent logoutIntent = new Intent(DashboardActivity.this, SplashActivity.class);
+            startActivity(logoutIntent);
             finish();
             dialog.dismiss();
         });

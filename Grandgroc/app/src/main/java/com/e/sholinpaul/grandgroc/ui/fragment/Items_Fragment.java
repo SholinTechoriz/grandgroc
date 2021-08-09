@@ -47,7 +47,7 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
 // 
 
             if (AllOrdersState.equals("OrderListActivity")) {
-            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
 
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();

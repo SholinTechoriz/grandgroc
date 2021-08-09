@@ -20,7 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.ScannedDataActivity"></activity>
         <activity android:name=".ui.activity.ScannerActivity" />
         <activity android:name=".ui.activity.OrderDetailsActivity" />
         <activity

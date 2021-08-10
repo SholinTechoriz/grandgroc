@@ -41,13 +41,23 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
 
     private void init() {
         final OrderModel orderModel = getArguments().getParcelable("order");
-//        final String ScanState = getArguments().getString("ActivityState");
+        final String ScanState = getArguments().getString("ActivityState");
         final String AllOrdersState = getArguments().getString("OrderLIST");
 
-// 
 
-            if (AllOrdersState.equals("OrderListActivity")) {
-//            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
+        if (ScanState.equals("scanActivity")) {
+
+            Toast.makeText(getActivity(), " from Scanning Activity", Toast.LENGTH_SHORT).show();
+            final String OId = getArguments().getString("orderscanned");
+            final String ID = getArguments().getString("ID");
+
+            Order_id = Integer.parseInt(OId);
+            id = Integer.parseInt(ID);
+
+            fetchAllOrderList();
+
+        } else if (AllOrdersState.equals("OrderListActivity")) {
+            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
 
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();
@@ -113,7 +123,6 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
                     LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                     binding.rvPriceList.setLayoutManager(linearLayoutManager1);
                     binding.rvPriceList.setAdapter(adapter1);
-
 
                 }
             });

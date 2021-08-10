@@ -40,7 +40,7 @@ public class OrderDetailsActivity extends BaseActivity implements NewOrderListLi
         super.onCreate(savedInstanceState);
         binding = ActivityOrderDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-         setContentView(view);
+        setContentView(view);
         init();
     }
 
@@ -68,19 +68,17 @@ public class OrderDetailsActivity extends BaseActivity implements NewOrderListLi
 
         orderModel = getIntent().getParcelableExtra("order");
 
-//        String scanState = getIntent().hasExtra("ActivityState") ? getIntent().getStringExtra("ActivityState") : "";
+        String scanState = getIntent().hasExtra("ActivityState") ? getIntent().getStringExtra("ActivityState") : "";
 
         String OrderListState = getIntent().hasExtra("OrderLIST") ? getIntent().getStringExtra("OrderLIST") : "";
 
 
-//        if (scanState.equals("scanActivity")) {
-//            order_Id = getIntent().getStringExtra("ORDER_ID");
-//            toolbarSection("#OrderID " + order_Id, true);
-//
-//
-//        } else
+        if (scanState.equals("scanActivity")) {
+            order_Id = getIntent().getStringExtra("ORDER_ID");
+            Id = getIntent().getStringExtra("ID");
+            toolbarSection("#OrderID " + order_Id, true);
 
-        if (OrderListState.equals("OrderListActivity")) {
+        } else if (OrderListState.equals("OrderListActivity")) {
             order_Id = String.valueOf(orderModel.getOrder_id());
             toolbarSection("#OrderID " + order_Id, true);
         }
@@ -92,11 +90,13 @@ public class OrderDetailsActivity extends BaseActivity implements NewOrderListLi
 
 
         Bundle bundle = new Bundle();
+//From Scanner Activity
 
         bundle.putString("orderscanned", order_Id);
-//        bundle.putString("ActivityState", scanState);
         bundle.putString("ID", Id);
+        bundle.putString("ActivityState", scanState);
 
+//From order Details Activity
 
         bundle.putParcelable("order", orderModel);
         bundle.putString("OrderLIST", OrderListState);

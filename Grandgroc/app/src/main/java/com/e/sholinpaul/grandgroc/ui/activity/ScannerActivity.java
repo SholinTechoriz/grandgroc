@@ -1,6 +1,7 @@
 package com.e.sholinpaul.grandgroc.ui.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     String accessToken;
     String deviceId;
+    ProductModel productModel;
     ArrayList<OrderModel> orderData;
     AllOrderModel allOrderModel;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
@@ -187,11 +189,18 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
     @Override
     public void fetchCheckedAssignedOrderDetails(PlaceModel order, List<ProductModel> order_details) {
 
-        Toast.makeText(this, "Successfully Verified", Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(ScannerActivity.this, OrderDetailsActivity.class);
-//        intent.putExtra("ORDER_ID", "" + qrCode);
-//        intent.putExtra("ActivityState", "scanActivity");
-//        startActivityForResult(intent, 301);
+        for (int i = 0; i < order_details.size(); i++) {
+            productModel = order_details.get(i);
+        }
+
+        String OrderID = String.valueOf(productModel.getOrder_id());
+        String ID = String.valueOf(order.getId());
+        Toast.makeText(this, ID, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ScannerActivity.this, OrderDetailsActivity.class);
+        intent.putExtra("ORDER_ID", OrderID);
+        intent.putExtra("ID", ID);
+        intent.putExtra("ActivityState", "scanActivity");
+        startActivityForResult(intent, 301);
     }
 
     @Override

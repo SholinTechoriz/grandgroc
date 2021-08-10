@@ -31,6 +31,7 @@ import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.ChangePasswordListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.GetProfileListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.UpdateProfileListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudManager.ProfileCloudManager;
+import com.e.sholinpaul.grandgroc.cloud.SPManager.LoginSPManager;
 import com.e.sholinpaul.grandgroc.databinding.CustomChangepasswordLayoutBinding;
 import com.e.sholinpaul.grandgroc.databinding.FragmentUserProfileBinding;
 import com.e.sholinpaul.grandgroc.model.Model.LoginModel;
@@ -442,6 +443,8 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
     @Override
     public void updateProfileDetails(LoginModel delivaryboy, String message) {
         fetchProfile();
+//        LoginSPManager loyaltyMessagesDBManager = new LoginSPManager(getActivity());
+//        loyaltyMessagesDBManager.saveLoginDetailsToSP(delivaryboy);
         Toast.makeText(getActivity(), "Updated Successfully", Toast.LENGTH_SHORT).show();
         binding.btnUpdate.setAlpha(BUTTON_ALPHA_VALUE_ENABLE);
 

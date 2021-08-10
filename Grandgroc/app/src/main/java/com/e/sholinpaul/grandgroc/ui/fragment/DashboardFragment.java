@@ -76,7 +76,7 @@ public class DashboardFragment extends Fragment {
     public class TabFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
         String[] title = new String[]{
-                "CURRENT  ORDERS", "NEW  ORDERS"
+                "NEW  ORDERS", "CURRENT  ORDERS"
         };
 
 

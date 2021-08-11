@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends BaseFragments {
 
 
     private FragmentDashboardBinding binding;

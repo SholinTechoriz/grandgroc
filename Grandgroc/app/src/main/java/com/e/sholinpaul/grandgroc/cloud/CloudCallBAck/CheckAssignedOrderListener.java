@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CheckAssignedOrderListener extends BaseListener {
 
-    void fetchCheckedAssignedOrderDetails( PlaceModel  order, List<ProductModel> order_details);
+    void fetchCheckedAssignedOrderDetails( PlaceModel  order, List<ProductModel> order_details,OrderModel AssignedOrder);
 
     void fetchCheckAssignedOrderDetailsFailed(String errorMessage);
 

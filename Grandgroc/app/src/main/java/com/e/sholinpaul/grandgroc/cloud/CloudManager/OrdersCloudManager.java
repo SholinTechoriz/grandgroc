@@ -240,7 +240,7 @@ public class OrdersCloudManager extends BaseCloudManger {
                 if (checkAssignedOrderResponse != null) {
                     if (checkAssignedOrderResponse.success == "true") {
                         if (listener != null) {
-                            listener.fetchCheckedAssignedOrderDetails(checkAssignedOrderResponse.order, checkAssignedOrderResponse.order_details);
+                            listener.fetchCheckedAssignedOrderDetails(checkAssignedOrderResponse.order, checkAssignedOrderResponse.order_details,checkAssignedOrderResponse.AssignedOrder);
                         }
                     } else {
                         if (listener != null) {

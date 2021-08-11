@@ -32,7 +32,7 @@
             android:layout_marginRight="4dp"
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
-            android:text="No internet connection"
+            android:text="@string/no_internet_connection"
             android:textAlignment="center"
             android:textColor="@color/colorGrey"
             android:textSize="18sp"

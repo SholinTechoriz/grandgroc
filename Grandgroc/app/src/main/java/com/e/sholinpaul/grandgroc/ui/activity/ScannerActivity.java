@@ -187,14 +187,14 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
 
 
     @Override
-    public void fetchCheckedAssignedOrderDetails(PlaceModel order, List<ProductModel> order_details) {
+    public void fetchCheckedAssignedOrderDetails(PlaceModel order, List<ProductModel> order_details, OrderModel AssignedOrder) {
 
         for (int i = 0; i < order_details.size(); i++) {
             productModel = order_details.get(i);
         }
 
         String OrderID = String.valueOf(productModel.getOrder_id());
-        String ID = String.valueOf(order.getId());
+        String ID = String.valueOf(AssignedOrder.getId());
         Toast.makeText(this, ID, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ScannerActivity.this, OrderDetailsActivity.class);
         intent.putExtra("ORDER_ID", OrderID);

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.e.sholinpaul.grandgroc.R;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.OrderDetailsListener;
@@ -22,7 +21,7 @@ import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 
 import java.util.List;
 
-public class LocationFragment extends Fragment implements OrderDetailsListener, PostStatusChangeListener {
+public class LocationFragment extends BaseFragments implements OrderDetailsListener, PostStatusChangeListener {
     View view;
     int Order_id, id;
     String accessToken, deviceId, status;
@@ -124,36 +123,42 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
 
 
         binding.btnCollected.setOnClickListener(v -> {
-
-            status = "collected";
-            if (ScanState.equals("ScanState")) {
-                postChangesByScanner();
+            if (doubleClickPrevent()) {
+                status = "collected";
+                if (ScanState.equals("ScanState")) {
+                    postChangesByScanner();
 //                showCurrentPlace();
-            } else {
-                postChangeStatus();
+                } else {
+                    postChangeStatus();
 //                showCurrentPlace();
+                }
             }
+
         });
 
         binding.btnDelivered.setOnClickListener(v -> {
-            status = "delivered";
-            if (ScanState.equals("ScanState")) {
-                postChangesByScanner();
+            if (doubleClickPrevent()) {
+                status = "delivered";
+                if (ScanState.equals("ScanState")) {
+                    postChangesByScanner();
 //                showCurrentPlace();
-            } else {
-                postChangeStatus();
+                } else {
+                    postChangeStatus();
 //                showCurrentPlace();
+                }
             }
+
         });
 
         binding.btnCompleted.setOnClickListener(v -> {
+            if (doubleClickPrevent()) {
+                status = "completed";
+                if (ScanState.equals("ScanState")) {
+                    postChangesByScanner();
+                } else {
+                    postChangeStatus();
 
-            status = "completed";
-            if (ScanState.equals("ScanState")) {
-                postChangesByScanner();
-            } else {
-                postChangeStatus();
-
+                }
             }
         });
     }
@@ -305,20 +310,6 @@ public class LocationFragment extends Fragment implements OrderDetailsListener, 
         }
     }
 
-    @Override
-    public void onStarted() {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
-    public void onConnectionFailure(int errorCode) {
-
-    }
 
     @Override
     public void postChangeStatus(OrderModel data, String Message) {

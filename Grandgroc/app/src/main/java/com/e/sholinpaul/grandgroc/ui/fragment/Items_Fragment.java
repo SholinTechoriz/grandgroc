@@ -22,7 +22,7 @@ import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 
 import java.util.List;
 
-public class Items_Fragment extends Fragment implements OrderDetailsListener {
+public class Items_Fragment extends BaseFragments implements OrderDetailsListener {
     View view;
     ItemsFragmentBinding binding;
     int Order_id, id;
@@ -172,18 +172,4 @@ public class Items_Fragment extends Fragment implements OrderDetailsListener {
         }
     }
 
-    @Override
-    public void onStarted() {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
-    public void onConnectionFailure(int errorCode) {
-
-    }
 }

@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/rlLMain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:padding="10dp">
 
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_delivery_icon"
                 android:drawablePadding="10dp"
-                android:text="DELIVERY LOCATION"
+                android:text="@string/delivery_location"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvHDeliveryLocation"
                 android:layout_marginTop="10dp"
-                android:text="Address : " />
+                android:text="@string/address" />
 
             <TextView
                 android:id="@+id/tvName"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvHAddress"
                 android:layout_marginTop="5dp"
-                android:text="Mundoor Maadan "
+                android:text="@string/grand_groc_in"
                 android:textColor="@color/colorBlack" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvName"
                 android:layout_marginTop="3dp"
-                android:text="Meenachirayil(H) ,Arakulam Po "
+                android:text="@string/meenachirayil_h_arakulam_po"
                 android:textColor="@color/colorBlack" />
 
             <TextView
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvHomeAddress"
                 android:layout_marginTop="5dp"
-                android:text="Peedikapally , 658655"
+                android:text="@string/peedikapally_658655"
                 android:textColor="@color/colorBlack" />
 
             <TextView
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvLocation1"
                 android:layout_marginTop="5dp"
-                android:text="Thrissur "
+                android:text="@string/calicut"
                 android:textColor="@color/colorBlack" />
 
 
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvDistrict"
                 android:layout_marginTop="15dp"
-                android:text="Landmark : " />
+                android:text="@string/landmark" />
 
             <TextView
                 android:id="@+id/tvLandmark"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvHLandmark"
                 android:layout_marginTop="5dp"
-                android:text="Thrissur "
+                android:text="@string/calicut"
                 android:textColor="@color/colorBlack" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvLandmark"
                 android:layout_marginTop="15dp"
-                android:text="Mobile No : " />
+                android:text="@string/mobile_no" />
 
             <TextView
                 android:id="@+id/tvPhone"
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvHPhone"
                 android:layout_marginTop="5dp"
-                android:text="9778006586 "
+                android:text="@string/_9778006586"
                 android:textColor="@color/colorBlack" />
 
 
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvPhone"
                 android:layout_marginTop="40dp"
-                android:text="PICKUP LOCATION"
+                android:text="@string/pickup_location"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold" />
 
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/map"
                 android:layout_marginTop="40dp"
-                android:text="CHANGE STATUS"
+                android:text="@string/change_status"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold" />
 
@@ -155,7 +155,7 @@
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:padding="5dp"
-                    android:text="Collected"
+                    android:text="@string/collected"
                     android:textColor="@color/colorWhite"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -168,7 +168,7 @@
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:padding="5dp"
-                    android:text="Delivered"
+                    android:text="@string/delivered"
                     android:textColor="@color/colorWhite"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -181,7 +181,7 @@
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:padding="5dp"
-                    android:text="Completed"
+                    android:text="@string/completed"
                     android:textColor="@color/colorWhite"
                     android:textSize="11sp"
                     android:textStyle="bold" />

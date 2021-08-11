@@ -1,13 +1,16 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +25,7 @@ public class BaseFragments extends Fragment implements BaseListener {
     ProgressDialog progressDialog;
     Context mContext;
     private AlertDialog.Builder builder;
+    public long mLastClickTime = 0;
 
     @Override
     public void onCompleted() {
@@ -45,6 +49,23 @@ public class BaseFragments extends Fragment implements BaseListener {
     public void onConnectionFailure(int errorCode) {
         noConnectionAlert();
     }
+
+
+    public boolean doubleClickPrevent() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return false;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        return true;
+    }
+
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        assert inputMethodManager != null;
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 
     public void showMessageAlert(final String title, final String msg, final boolean flag) {
         assert getActivity() != null;

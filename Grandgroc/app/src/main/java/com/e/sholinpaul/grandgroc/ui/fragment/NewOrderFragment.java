@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewOrderFragment extends Fragment implements NewOrderListListener, GetOrderTypeListener {
+public class NewOrderFragment extends BaseFragments implements NewOrderListListener, GetOrderTypeListener {
     View view;
     String accessToken;
     String deviceId;
@@ -129,18 +129,9 @@ public class NewOrderFragment extends Fragment implements NewOrderListListener, 
 
 
     @Override
-    public void onStarted() {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
-    public void onConnectionFailure(int errorCode) {
-
+    public void onResume() {
+        super.onResume();
+        fetchNewOrderFromServer(page);
     }
 
     @Override

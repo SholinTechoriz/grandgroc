@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,14 +18,13 @@ import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.model.Model.AllOrderModel;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.CurrentOrderFragmentAdapter;
-import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.NewOrderFragmentAdapter;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class CurrentOrderFragment extends Fragment implements NewOrderListListener {
+public class CurrentOrderFragment extends BaseFragments implements NewOrderListListener {
     View view;
     String accessToken;
     String deviceId;
@@ -35,7 +33,7 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
     ArrayList<OrderModel> orderData;
     AllOrderModel allOrderModel;
     RecyclerView rvCurrentOrder;
-    RelativeLayout schListNotFound,rlCMain;
+    RelativeLayout schListNotFound, rlCMain;
     LinearLayout lLoading;
     int page = 1;
 
@@ -51,7 +49,7 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
         orderData = new ArrayList<>();
         rvCurrentOrder = view.findViewById(R.id.rvCurrentOrder);
         schListNotFound = view.findViewById(R.id.schListNotFound);
-        rlCMain=view.findViewById(R.id.rlCMain);
+        rlCMain = view.findViewById(R.id.rlCMain);
         lLoading = view.findViewById(R.id.lLoading);
         fetchCurrentOrderFromServer(page);
         rvCurrentOrder.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -95,7 +93,7 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
                 @Override
                 public void run() {
 
-                    adapter = new CurrentOrderFragmentAdapter(data, getActivity(),fragment);
+                    adapter = new CurrentOrderFragmentAdapter(data, getActivity(), fragment);
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
                     rvCurrentOrder.setLayoutManager(gridLayoutManager);
                     rvCurrentOrder.setAdapter(adapter);
@@ -113,19 +111,11 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
     }
 
 
-    @Override
-    public void onStarted() {
-
-    }
 
     @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
-    public void onConnectionFailure(int errorCode) {
-
+    public void onResume() {
+        super.onResume();
+        fetchCurrentOrderFromServer(page);
     }
 
     @Override
@@ -161,7 +151,6 @@ public class CurrentOrderFragment extends Fragment implements NewOrderListListen
         lLoading.setVisibility(View.GONE);
 
     }
-
 
 
     public static void enableDisableView(View view, boolean enabled) {

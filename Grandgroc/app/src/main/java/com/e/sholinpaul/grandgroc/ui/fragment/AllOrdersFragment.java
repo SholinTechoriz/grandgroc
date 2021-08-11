@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AllOrdersFragment extends Fragment implements NewOrderListListener, GetOrderTypeListener {
+public class AllOrdersFragment extends BaseFragments implements NewOrderListListener, GetOrderTypeListener {
 
     private FragmentAllOrdersBinding binding;
     AllOrdersFragment fragment;
@@ -166,20 +166,6 @@ public class AllOrdersFragment extends Fragment implements NewOrderListListener,
 
     }
 
-    @Override
-    public void onStarted() {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
-    public void onConnectionFailure(int errorCode) {
-
-    }
 
     @Override
     public void fetchOrderTypes(String message, List<OrderModel> deliverytypes) {

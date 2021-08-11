@@ -13,40 +13,66 @@
         android:layout_margin="5dp"
         android:padding="6dp">
 
+
+        <TextView
+            android:id="@+id/tvAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:fontFamily="@font/muli_bold"
+            android:text="@string/alert"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
         <TextView
             android:id="@+id/tvLgText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Do u want to logout ..?"
+            android:layout_below="@id/tvAlert"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
             android:fontFamily="@font/muli_semi_bold_italic"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_margin="6dp"
+            android:padding="5dp"
+            android:text="@string/do_u_want_to_logout"
             android:textColor="@color/colorBlack"
-            android:padding="5dp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnYes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            android:fontFamily="@font/muli_semi_bold_italic"
-            android:layout_margin="8dp"
             android:layout_below="@id/tvLgText"
-            android:textColor="@color/colorBlack"
-            android:background="@color/colorWhite" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorWhite"
+            android:fontFamily="@font/muli_semi_bold_italic"
+            android:text="@string/yes"
+            android:textColor="@color/colorBlack" />
 
         <Button
             android:id="@+id/btnNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:fontFamily="@font/muli_semi_bold_italic"
-            android:layout_margin="8dp"
             android:layout_below="@id/tvLgText"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_toEndOf="@id/btnYes"
-            android:textColor="@color/colorBlack"
-            android:background="@color/colorWhite" />
+            android:background="@color/colorWhite"
+            android:fontFamily="@font/muli_semi_bold_italic"
+            android:text="@string/cancel"
+            android:textColor="@color/colorBlack" />
 
 
     </RelativeLayout>

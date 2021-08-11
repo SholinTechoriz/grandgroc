@@ -38,13 +38,16 @@
         android:id="@+id/activity_main_qrCodeFoundButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_image"
-        android:textColor="@color/colorPrimary"
-        android:fontFamily="@font/muli_semi_bold_italic"
-        android:layout_margin="8dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Data Found" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/background_image"
+        android:fontFamily="@font/muli_semi_bold_italic"
+        android:text="@string/data_found"
+        android:textColor="@color/colorPrimary" />
 
 
 </RelativeLayout>

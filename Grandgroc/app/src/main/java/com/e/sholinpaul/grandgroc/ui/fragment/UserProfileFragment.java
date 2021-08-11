@@ -21,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -31,7 +30,6 @@ import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.ChangePasswordListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.GetProfileListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.UpdateProfileListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudManager.ProfileCloudManager;
-import com.e.sholinpaul.grandgroc.cloud.SPManager.LoginSPManager;
 import com.e.sholinpaul.grandgroc.databinding.CustomChangepasswordLayoutBinding;
 import com.e.sholinpaul.grandgroc.databinding.FragmentUserProfileBinding;
 import com.e.sholinpaul.grandgroc.model.Model.LoginModel;
@@ -39,6 +37,9 @@ import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +49,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 
-public class UserProfileFragment extends Fragment implements GetProfileListener, UpdateProfileListener, ChangePasswordListener {
+public class UserProfileFragment extends BaseFragments implements GetProfileListener, UpdateProfileListener, ChangePasswordListener {
 
     View view;
     private FragmentUserProfileBinding binding;
@@ -59,6 +60,7 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
     private static final int SELECT_PROFILE_PIC_REQUEST_CODE = 303;
     float BUTTON_ALPHA_VALUE_ENABLE = 1f;
     float BUTTON_ALPHA_VALUE_DISABLE = 0.6f;
+    long epochTime;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,32 +75,40 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
 
         fetchProfile();
         binding.fabProfile.setOnClickListener(view -> {
+            if (doubleClickPrevent()) {
+                hideKeyboard(view);
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            SELECT_PROFILE_PIC_REQUEST_CODE);
+                } else {
 
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        SELECT_PROFILE_PIC_REQUEST_CODE);
-            } else {
-                showImageAlert();
+                    showImageAlert();
+                }
             }
-
 
         });
 
         binding.btnUpdate.setOnClickListener(v -> {
-            if (binding.btnUpdate.getText().equals("Edit")) {
-                setDataToEdit(model);
 
-            } else {
-                validateAndUpdateDataToServer();
+            if (doubleClickPrevent()) {
+                hideKeyboard(v);
+                if (binding.btnUpdate.getText().equals("Edit")) {
+                    setDataToEdit(model);
+                } else {
+                    validateAndUpdateDataToServer();
+                }
             }
+
         });
 
         binding.tvChangePassword.setOnClickListener(v -> {
-            accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
-            Log.d("ACCESS12", "access token is.." + accessToken);
-            deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
-            showChangePassword(accessToken, deviceId);
+            if (doubleClickPrevent()) {
+                hideKeyboard(v);
+                accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
+                deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
+                showChangePassword(accessToken, deviceId);
+            }
         });
 
 
@@ -222,7 +232,21 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
         binding.edLocation.setText(data.getLocation());
         binding.edEmail.setText(data.getEmail());
         binding.edPhone.setText(data.getPhone());
-        binding.edDate.setText(data.getCreated_at());
+
+// Date format Convert in string
+        String date_string = data.getCreated_at();
+        String convert_to_pattern = "dd-MM-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(convert_to_pattern);
+        Date date_object = null;
+        try {
+            date_object = new SimpleDateFormat("yyyy-MM-dd").parse(date_string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String corrected_date_string = simpleDateFormat.format(date_object);
+
+
+        binding.edDate.setText(corrected_date_string);
         binding.edEmpCode.setText(data.getEmployee_code());
     }
 
@@ -262,7 +286,20 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
         binding.edLocation.setText(model.getLocation());
         binding.edEmail.setText(model.getEmail());
         binding.edPhone.setText(model.getPhone());
-        binding.edDate.setText(model.getCreated_at());
+
+        String date_string = model.getCreated_at();
+        String convert_to_pattern = "dd-MM-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(convert_to_pattern);
+        Date date_object = null;
+        try {
+            date_object = new SimpleDateFormat("yyyy-MM-dd").parse(date_string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String corrected_date_string = simpleDateFormat.format(date_object);
+
+
+        binding.edDate.setText(corrected_date_string);
         binding.edEmpCode.setText(model.getEmployee_code());
     }
 
@@ -425,20 +462,6 @@ public class UserProfileFragment extends Fragment implements GetProfileListener,
 
     }
 
-    @Override
-    public void onStarted() {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
-    public void onConnectionFailure(int errorCode) {
-
-    }
 
     @Override
     public void updateProfileDetails(LoginModel delivaryboy, String message) {

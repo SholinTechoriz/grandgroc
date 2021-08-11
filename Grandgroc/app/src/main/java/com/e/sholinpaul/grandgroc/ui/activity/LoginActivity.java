@@ -112,8 +112,6 @@ public class LoginActivity extends BaseActivity implements LoginListener {
         }
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
 
-        Log.d("qwerty", " data iss  :" + delivery_details.getEmail());
-
 
     }
 

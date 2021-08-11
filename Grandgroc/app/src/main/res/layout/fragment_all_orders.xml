@@ -51,7 +51,7 @@
                 style="@style/tvNotFound"
                 android:layout_below="@+id/imgSchNull"
                 android:gravity="center_horizontal"
-                android:text="Orders not Available"
+                android:text="@string/orders_not_available"
                 android:textAlignment="center" />
 
         </RelativeLayout>

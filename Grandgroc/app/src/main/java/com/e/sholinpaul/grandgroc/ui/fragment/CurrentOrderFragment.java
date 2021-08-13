@@ -116,6 +116,8 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
     public void onResume() {
         super.onResume();
         fetchCurrentOrderFromServer(page);
+
+
     }
 
     @Override

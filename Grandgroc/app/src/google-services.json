@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "15701224191",
+    "project_id": "grandgroc-2f128",
+    "storage_bucket": "grandgroc-2f128.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15701224191:android:2625440550d95441b4baca",
+        "android_client_info": {
+          "package_name": "com.e.sholinpaul.grandgroc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15701224191-gk1t4ggsqbot09h5ibi6erp6g25f3s1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.sholinpaul.grandgroc",
+            "certificate_hash": "3396fb2f45a3057b90cbdc41e09fba56031ec759"
+          }
+        },
+        {
+          "client_id": "15701224191-v0d0n9ke3irrk86mi8l3veoedl3b5enl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVDbvHbZNA-3uthqd8iBzfve8lIlvSbRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15701224191-v0d0n9ke3irrk86mi8l3veoedl3b5enl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

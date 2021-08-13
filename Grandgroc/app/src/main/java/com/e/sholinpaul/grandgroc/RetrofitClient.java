@@ -16,7 +16,7 @@ public class RetrofitClient {
 
     private static RetrofitClient mRetrofitClient;
 
-    public static String BASE_URL = "https://projects.techoriz.in/grandgroc/public/api/";
+    public static String BASE_URL =  BuildConfig.BASE_URL;;
 
 
     public static RetrofitClient getInstance() {

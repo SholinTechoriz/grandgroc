@@ -3,7 +3,6 @@ package com.e.sholinpaul.grandgroc.ui.fragmentAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,9 +64,6 @@ public class NewOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((MyViewHolder) holder).binding.tvDeliveryType.setText(orderModel.getType());
 
 
-
-
-
             if (orderModel.getDelivarytype().equals("Normal")) {
                 ((MyViewHolder) holder).binding.tvBcgrnd.setBackgroundResource(R.drawable.ic_regular_bg);
                 ((MyViewHolder) holder).binding.tvOrderType.setText("Normal");
@@ -95,7 +91,7 @@ public class NewOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         Intent intent = new Intent(mcontext, OrderDetailsActivity.class);
         intent.putExtra("order", orderModel);
         intent.putExtra("OrderLIST", "OrderListActivity");
-        ((Activity) mcontext).startActivity(intent);
+        ((Activity) mcontext).startActivityForResult(intent, 301);
 
     }
 

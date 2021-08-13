@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -34,11 +33,10 @@ import com.e.sholinpaul.grandgroc.databinding.SinglelogoutlayoutBinding;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 import com.google.android.material.navigation.NavigationView;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends BaseActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDashboardBinding binding;
-
 
 
     @Override

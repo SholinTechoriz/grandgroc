@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:padding="6dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/imgSchNull"
@@ -58,12 +58,12 @@
 
         <LinearLayout
             android:id="@+id/lLoading"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal"
-            android:visibility="gone"
+            android:visibility="visible"
             android:weightSum="2">
 
             <ProgressBar
@@ -72,7 +72,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="10dp"
-                android:indeterminateTint="@color/colorGrey"
+                android:indeterminateTint="@color/colorPrimary"
                 android:visibility="visible" />
 
             <TextView

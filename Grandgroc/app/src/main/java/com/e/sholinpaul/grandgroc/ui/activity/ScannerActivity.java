@@ -63,15 +63,15 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
         binding.activityMainQrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (qrCode.isEmpty()) {
-                    showMessage("Data not found");
-                } else {
-                    fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+                if(doubleClickPrevent()){
+                    if (qrCode.isEmpty()) {
+                        showMessage("Data not found");
+                    } else {
+                        fetchCheckAssignedOrder(Integer.parseInt(qrCode));
 
-                    Log.i(ScannerActivity.class.getSimpleName(), "Data Found: " + qrCode);
+                        Log.i(ScannerActivity.class.getSimpleName(), "Data Found: " + qrCode);
+                    }
                 }
-
-
             }
         });
 

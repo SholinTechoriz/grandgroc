@@ -58,12 +58,12 @@
 
         <LinearLayout
             android:id="@+id/lLoading"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-     android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal"
-            android:visibility="visible"
+            android:visibility="gone"
             android:weightSum="2">
 
             <ProgressBar

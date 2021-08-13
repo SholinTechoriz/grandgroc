@@ -156,6 +156,7 @@ public class OrderDetailsActivity extends BaseActivity implements NewOrderListLi
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
+            setResult(301);
             return true;
         }
         return super.onOptionsItemSelected(item);

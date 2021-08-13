@@ -4,9 +4,11 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c80074efd3e1a7ced91e3069ddff793/jetified-camera-lifecycle-1.0.0-beta07/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b892eb563b03a737808f3f99fe49f319/camera-lifecycle-1.0.0-beta07/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/abe8981088722d2a98c8ab8b062d9734/camera-lifecycle-1.0.0-beta07/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06b25e6316c3bbdfd10fdc9dc4e6d191/camera-lifecycle-1.0.0-beta07/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06b25e6316c3bbdfd10fdc9dc4e6d191/camera-lifecycle-1.0.0-beta07/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06b25e6316c3bbdfd10fdc9dc4e6d191/camera-lifecycle-1.0.0-beta07/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dfe09b7a1f36b20ccd8c4534cfb767b0/camera-lifecycle-1.0.0-beta07/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/182ffd07d7eefd5f4d980a76a1a2a51f/camera-lifecycle-1.0.0-beta07/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/182ffd07d7eefd5f4d980a76a1a2a51f/camera-lifecycle-1.0.0-beta07/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/182ffd07d7eefd5f4d980a76a1a2a51f/camera-lifecycle-1.0.0-beta07/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

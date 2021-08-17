@@ -18,12 +18,8 @@
             android:id="@+id/rlHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/tabroundshapebtn"
-            android:backgroundTint="@color/colorUltraLightGreen"
-            android:padding="10dp">
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
 
             <RelativeLayout
                 android:id="@+id/rlImgSec"
@@ -40,7 +36,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:scaleType="centerCrop"
-                    app:civ_border_color="@color/colorWhite"
+                    app:civ_border_color="@color/colorUltraLightGreen"
                     app:civ_border_overlay="false"
                     app:civ_border_width="3dp" />
 
@@ -49,23 +45,25 @@
 
             <TextView
                 android:id="@+id/mainUName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rlImgSec"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/muli_semi_bold_italic"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/muli_bold_italic"
+                android:gravity="center"
                 android:text="@string/grandgroc"
                 android:textColor="@color/colorBlack"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/mainULocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/mainUName"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/muli_semi_bold_italic"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/muli_bold"
+                android:gravity="center"
                 android:text="@string/calicut"
                 android:textColor="@color/colorBlack"
                 android:textSize="15sp"
@@ -106,9 +104,9 @@
                     android:id="@+id/rlprofileEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="100dp"
-                    android:padding="20dp">
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:padding="10dp">
 
                     <RelativeLayout
                         android:id="@+id/rlUserName"
@@ -341,7 +339,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvChangePassword"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="25sp"
+                        android:layout_marginTop="16sp"
                         android:background="@drawable/roundshapebtn"
                         android:fontFamily="@font/muli_semi_bold_italic"
                         android:text="@string/edit"

@@ -94,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:text="@string/location"
+                android:textColor="@color/colorGrey"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -121,8 +122,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:gravity="center_horizontal"
+                android:textColor="@color/colorGrey"
                 android:text="@string/cod"
-                android:textSize="10sp"
+                android:textSize="10dp"
                 android:textStyle="bold" />
         </LinearLayout>
 

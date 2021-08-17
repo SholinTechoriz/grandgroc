@@ -16,7 +16,7 @@ public class RetrofitClient {
 
     private static RetrofitClient mRetrofitClient;
 
-    public static String BASE_URL =  BuildConfig.BASE_URL;;
+    public static String BASE_URL =  BuildConfig.BASE_URL;
 
 
     public static RetrofitClient getInstance() {

@@ -2,11 +2,9 @@ package com.e.sholinpaul.grandgroc.model.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-
 public class AllOrderModel implements Parcelable {
     @SerializedName("current_page")
     private int current_page;

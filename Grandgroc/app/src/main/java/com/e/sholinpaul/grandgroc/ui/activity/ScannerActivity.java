@@ -1,27 +1,13 @@
 package com.e.sholinpaul.grandgroc.ui.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Size;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.camera.core.Camera;
-import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ImageAnalysis;
-import androidx.camera.core.Preview;
-import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
+import androidx.annotation.Nullable;
 
 import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.CheckAssignedOrderListener;
-import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.QRCodeFoundListener;
 import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.databinding.ActivityScannerBinding;
 import com.e.sholinpaul.grandgroc.model.Model.AllOrderModel;
@@ -29,11 +15,11 @@ import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.model.Model.PlaceModel;
 import com.e.sholinpaul.grandgroc.model.Model.ProductModel;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
-import com.google.common.util.concurrent.ListenableFuture;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ScannerActivity extends BaseActivity implements CheckAssignedOrderListener {
     ActivityScannerBinding binding;
@@ -41,12 +27,12 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
     String accessToken;
     String deviceId;
     ProductModel productModel;
+    private String qrCode;
+
     ArrayList<OrderModel> orderData;
     AllOrderModel allOrderModel;
-    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     int page = 1;
 
-    private String qrCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,126 +41,36 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
         View view = binding.getRoot();
         setContentView(view);
         init();
+
     }
 
     private void init() {
+        IntentIntegrator intentIntegrator = new IntentIntegrator(ScannerActivity.this);
+        intentIntegrator.setPrompt("Scan a barcode or QR Code");
+        intentIntegrator.setOrientationLocked(false);
+        intentIntegrator.initiateScan();
 
-        binding.activityMainQrCodeFoundButton.setVisibility(View.INVISIBLE);
-        binding.activityMainQrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(doubleClickPrevent()){
-                    if (qrCode.isEmpty()) {
-                        showMessage("Data not found");
-                    } else {
-                        fetchCheckAssignedOrder(Integer.parseInt(qrCode));
-
-                        Log.i(ScannerActivity.class.getSimpleName(), "Data Found: " + qrCode);
-                    }
-                }
-            }
-        });
-
-        binding.btnCloseScanner.setOnClickListener(view -> {
-            finish();
-        });
-
-        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
-
-        requestCamera();
-
-
-    }
-
-
-    private void requestCamera() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            startCamera();
-        } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                ActivityCompat.requestPermissions(ScannerActivity.this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
-            }
-        }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_CAMERA) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startCamera();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        // if the intentResult is null then
+        // toast a message as "cancelled"
+        if (intentResult != null) {
+            if (intentResult.getContents() == null) {
+                Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Camera Permission Denied", Toast.LENGTH_SHORT).show();
+                // if the intentResult is not null we'll set
+                // the content and format of scan message
+                qrCode = intentResult.getContents();
+                fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+
             }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    private void startCamera() {
-        cameraProviderFuture.addListener(() -> {
-            try {
-                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-                bindCameraPreview(cameraProvider);
-            } catch (ExecutionException | InterruptedException e) {
-                Toast.makeText(this, "Error starting camera " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }, ContextCompat.getMainExecutor(this));
-    }
-
-    private void bindCameraPreview(@NonNull ProcessCameraProvider cameraProvider) {
-        binding.activityMainPreviewView.setPreferredImplementationMode(PreviewView.ImplementationMode.SURFACE_VIEW);
-
-        Preview preview = new Preview.Builder()
-                .build();
-
-        CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                .build();
-
-        preview.setSurfaceProvider(binding.activityMainPreviewView.createSurfaceProvider());
-
-        ImageAnalysis imageAnalysis =
-                new ImageAnalysis.Builder()
-                        .setTargetResolution(new Size(1280, 720))
-                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                        .build();
-
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this), new QRCodeImageAnalyzer(new QRCodeFoundListener() {
-            @Override
-            public void onQRCodeFound(String _qrCode) {
-                qrCode = _qrCode;
-//                StringTokenizer tokens = new StringTokenizer(_qrCode, "|");
-//
-//                //////////////Order id///////////
-//                String first = tokens.nextToken();
-//
-//                StringTokenizer firstData = new StringTokenizer(first, "-");
-//                String firstData1 = firstData.nextToken();
-//                String firstData2 = firstData.nextToken();
-//
-//                convertedOrderId = Integer.parseInt(firstData2);
-
-//                ////////////store id//////////
-//                String second = tokens.nextToken();
-//
-//                StringTokenizer secondData = new StringTokenizer(second, "-");
-//                String secondData1 = secondData.nextToken();
-//                String secondData2 = secondData.nextToken();
-//
-//                convertedStoreId = Integer.parseInt(secondData2);
-                binding.activityMainQrCodeFoundButton.setVisibility(View.VISIBLE);
-
-
-            }
-
-            @Override
-            public void qrCodeNotFound() {
-                binding.activityMainQrCodeFoundButton.setVisibility(View.INVISIBLE);
-            }
-        }));
-
-        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, imageAnalysis, preview);
     }
 
 
@@ -205,6 +101,6 @@ public class ScannerActivity extends BaseActivity implements CheckAssignedOrderL
 
     @Override
     public void fetchCheckAssignedOrderDetailsFailed(String errorMessage) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Qr Code is invalid", Toast.LENGTH_SHORT).show();
     }
 }

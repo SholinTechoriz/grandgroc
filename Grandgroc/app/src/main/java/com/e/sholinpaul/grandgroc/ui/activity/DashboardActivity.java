@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -28,16 +29,28 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.e.sholinpaul.grandgroc.R;
+import com.e.sholinpaul.grandgroc.cloud.CloudCallBAck.CheckAssignedOrderListener;
+import com.e.sholinpaul.grandgroc.cloud.CloudManager.OrdersCloudManager;
 import com.e.sholinpaul.grandgroc.databinding.ActivityDashboardBinding;
 import com.e.sholinpaul.grandgroc.databinding.SinglelogoutlayoutBinding;
+import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
+import com.e.sholinpaul.grandgroc.model.Model.PlaceModel;
+import com.e.sholinpaul.grandgroc.model.Model.ProductModel;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
-public class DashboardActivity extends BaseActivity {
+import java.util.List;
+
+public class DashboardActivity extends BaseActivity implements CheckAssignedOrderListener  {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDashboardBinding binding;
-
+    String accessToken;
+    String deviceId;
+    ProductModel productModel;
+    private String qrCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,12 +151,73 @@ public class DashboardActivity extends BaseActivity {
                 Toast.makeText(this, "Not yet assigned", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_scan:
-                Intent intent = new Intent(DashboardActivity.this, ScannerActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(DashboardActivity.this, ScannerActivity.class);
+//                startActivity(intent);
+                functionScanner();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void functionScanner() {
+        IntentIntegrator intentIntegrator = new IntentIntegrator(DashboardActivity.this);
+        intentIntegrator.setPrompt("Scan a barcode or QR Code");
+        intentIntegrator.setOrientationLocked(false);
+        intentIntegrator.initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        // if the intentResult is null then
+        // toast a message as "cancelled"
+        if (intentResult != null) {
+            if (intentResult.getContents() == null) {
+                Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                // if the intentResult is not null we'll set
+                // the content and format of scan message
+                qrCode = intentResult.getContents();
+                fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+    private void fetchCheckAssignedOrder(int Order_id) {
+        accessToken = BusinessDetailsGenerator.getInstance(this).getApi_token();
+        deviceId = BusinessDetailsGenerator.getInstance(this).getDeviceId();
+        OrdersCloudManager orderListCloudManager = new OrdersCloudManager(this);
+        orderListCloudManager.CheckAssignedOrder(deviceId, accessToken, Order_id, this);
+    }
+
+
+    @Override
+    public void fetchCheckedAssignedOrderDetails(PlaceModel order, List<ProductModel> order_details, OrderModel AssignedOrder) {
+
+        for (int i = 0; i < order_details.size(); i++) {
+            productModel = order_details.get(i);
+        }
+
+        String OrderID = String.valueOf(productModel.getOrder_id());
+        String ID = String.valueOf(AssignedOrder.getId());
+        Toast.makeText(this, ID, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(DashboardActivity.this, OrderDetailsActivity.class);
+        intent.putExtra("ORDER_ID", OrderID);
+        intent.putExtra("ID", ID);
+        intent.putExtra("ActivityState", "scanActivity");
+        startActivityForResult(intent, 301);
+    }
+
+    @Override
+    public void fetchCheckAssignedOrderDetailsFailed(String errorMessage) {
+        Toast.makeText(this, "Qr Code is invalid", Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -151,4 +225,6 @@ public class DashboardActivity extends BaseActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
 }

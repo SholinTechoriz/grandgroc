@@ -68,13 +68,7 @@ public class RetrofitClient {
 
         return retrofit.create(API_Grand_Groc.class);
     }
-//
-//    public API_EMP getEmpClient() {
-//
-//        Retrofit retrofit = getRetrofit();
-//
-//        return retrofit.create(API_EMP.class);
-//    }
+
 
 
 }

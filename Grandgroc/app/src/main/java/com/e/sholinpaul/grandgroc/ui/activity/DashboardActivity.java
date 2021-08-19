@@ -43,7 +43,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.List;
 
-public class DashboardActivity extends BaseActivity implements CheckAssignedOrderListener  {
+public class DashboardActivity extends BaseActivity implements CheckAssignedOrderListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDashboardBinding binding;
@@ -179,7 +179,12 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
                 qrCode = intentResult.getContents();
-                fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+                if (intentResult.getFormatName() != ("QR_CODE")) {
+                    showMessage("Invalid Data");
+                } else {
+                    fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+                }
+
 
             }
         } else {

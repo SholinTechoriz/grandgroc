@@ -50,7 +50,6 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
     String accessToken;
     String deviceId;
     ProductModel productModel;
-    private String qrCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +67,7 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_profile, R.id.nav_viewOrder)
-                .setDrawerLayout(drawer)
+                .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -178,14 +177,8 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
             } else {
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
-                qrCode = intentResult.getContents();
-                if (intentResult.getFormatName() != ("QR_CODE")) {
-                    showMessage("Invalid Data");
-                } else {
-                    fetchCheckAssignedOrder(Integer.parseInt(qrCode));
-                }
-
-
+                String qrCode = intentResult.getContents();
+                fetchCheckAssignedOrder(Integer.parseInt(qrCode));
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -210,7 +203,6 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
 
         String OrderID = String.valueOf(productModel.getOrder_id());
         String ID = String.valueOf(AssignedOrder.getId());
-        Toast.makeText(this, ID, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(DashboardActivity.this, OrderDetailsActivity.class);
         intent.putExtra("ORDER_ID", OrderID);
         intent.putExtra("ID", ID);

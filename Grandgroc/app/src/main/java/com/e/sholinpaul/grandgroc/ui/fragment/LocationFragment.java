@@ -1,6 +1,5 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,7 +32,6 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
     int Order_id, id;
     String accessToken, deviceId, status;
     LocationFragmentBinding binding;
-    Context myContext;
     GoogleMap map;
 
 
@@ -50,14 +48,13 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
 
         BuildMap();
 
+        assert getArguments() != null;
         final OrderModel orderModel = getArguments().getParcelable("order");
         final String ScanState = getArguments().getString("ActivityState");
         final String AllOrdersState = getArguments().getString("OrderLIST");
 
 
         if (ScanState.equals("scanActivity")) {
-
-            Toast.makeText(getActivity(), " from Scanning Activity", Toast.LENGTH_SHORT).show();
             final String OId = getArguments().getString("orderscanned");
             final String ID = getArguments().getString("ID");
 
@@ -68,12 +65,12 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
 
         } else if (AllOrdersState.equals("OrderListActivity")) {
 
-
-            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
-
-
-            Order_id = orderModel.getOrder_id();
-            id = orderModel.getId();
+            if (orderModel.equals("")) {
+                Toast.makeText(getActivity(), "empty Data", Toast.LENGTH_SHORT).show();
+            } else {
+                Order_id = orderModel.getOrder_id();
+                id = orderModel.getId();
+            }
             fetchAllOrderList();
 
         }
@@ -84,10 +81,9 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
                 status = "collected";
                 if (ScanState.equals("ScanState")) {
                     postChangesByScanner();
-//                showCurrentPlace();
                 } else {
                     postChangeStatus();
-//                showCurrentPlace();
+
                 }
             }
 
@@ -98,10 +94,9 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
                 status = "delivered";
                 if (ScanState.equals("ScanState")) {
                     postChangesByScanner();
-//                showCurrentPlace();
                 } else {
                     postChangeStatus();
-//                showCurrentPlace();
+
                 }
             }
 
@@ -123,7 +118,7 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
     private void BuildMap() {
         // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
 

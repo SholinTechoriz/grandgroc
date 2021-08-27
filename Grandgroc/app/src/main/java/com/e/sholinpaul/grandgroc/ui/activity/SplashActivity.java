@@ -34,7 +34,7 @@ public class SplashActivity extends BaseActivity {
                 "from Grandgroc grocery app and fast\n" +
                 "delivery to your doorstep";
         binding.tvContent.setText(text1);
-        
+
         binding.btnGotoLogin.setOnClickListener(view1 -> {
             if (doubleClickPrevent()) {
 

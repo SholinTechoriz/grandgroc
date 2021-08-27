@@ -1,6 +1,5 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -197,12 +196,12 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
         setDataToTextview(order);
 
 
-        Drawable drawable = getResources().getDrawable(R.drawable.ic_green_tick);
+//        Drawable drawable = getResources().getDrawable(R.drawable.ic_green_tick);
 
         switch (status) {
 
             case "delivered":
-                binding.btnDelivered.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+//                binding.btnDelivered.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
                 binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorPrimary));
 
@@ -216,7 +215,7 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
 
             case "collected":
 
-                binding.btnCollected.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+//                binding.btnCollected.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
                 binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 binding.btnCollected.setTextColor(getResources().getColor(R.color.colorPrimary));
 
@@ -229,7 +228,7 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
 
 
             case "completed":
-                binding.btnCompleted.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+//                binding.btnCompleted.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
                 binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorPrimary));
 

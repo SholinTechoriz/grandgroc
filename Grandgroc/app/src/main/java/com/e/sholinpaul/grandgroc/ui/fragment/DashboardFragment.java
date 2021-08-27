@@ -82,12 +82,10 @@ public class DashboardFragment extends BaseFragments {
 
         TabFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
-
         }
 
         @Override
         public Fragment getItem(int position) {
-
             return position >= mFragmentArrayList.size() ? null : mFragmentArrayList.get(position);
         }
 

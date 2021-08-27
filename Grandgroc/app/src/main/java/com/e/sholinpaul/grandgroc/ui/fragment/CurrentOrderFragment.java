@@ -89,17 +89,13 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
             if (getActivity() == null) {
                 return;
             }
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    adapter = new CurrentOrderFragmentAdapter(data, getActivity(), fragment);
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-                    rvCurrentOrder.setLayoutManager(gridLayoutManager);
-                    rvCurrentOrder.setAdapter(adapter);
+            getActivity().runOnUiThread(() -> {
+                adapter = new CurrentOrderFragmentAdapter(data, getActivity(), fragment);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+                rvCurrentOrder.setLayoutManager(gridLayoutManager);
+                rvCurrentOrder.setAdapter(adapter);
 
 
-                }
             });
 
             schListNotFound.setVisibility(View.GONE);
@@ -109,7 +105,6 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
         }
 
     }
-
 
 
     @Override
@@ -136,6 +131,8 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
             View view = rlCMain.getChildAt(i);
             enableDisableView(view, true);
         }
+//                adapter.removeModel(orderData);
+
         lLoading.setVisibility(View.GONE);
     }
 

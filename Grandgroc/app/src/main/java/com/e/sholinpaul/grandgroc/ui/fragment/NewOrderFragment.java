@@ -132,6 +132,7 @@ public class NewOrderFragment extends BaseFragments implements NewOrderListListe
     public void onResume() {
         super.onResume();
         fetchNewOrderFromServer(page);
+
     }
 
     @Override
@@ -151,7 +152,7 @@ public class NewOrderFragment extends BaseFragments implements NewOrderListListe
             View view = rlMain.getChildAt(i);
             enableDisableView(view, true);
         }
-
+//        adapter.removeModel(orderData);
         lLoading.setVisibility(View.GONE);
 
     }

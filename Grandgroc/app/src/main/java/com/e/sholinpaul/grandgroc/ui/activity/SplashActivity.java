@@ -34,7 +34,7 @@ public class SplashActivity extends BaseActivity {
                 "from Grandgroc grocery app and fast\n" +
                 "delivery to your doorstep";
         binding.tvContent.setText(text1);
-
+        
         binding.btnGotoLogin.setOnClickListener(view1 -> {
             if (doubleClickPrevent()) {
 
@@ -67,25 +67,19 @@ public class SplashActivity extends BaseActivity {
 
     private void goToLogin() {
         Handler handler = new Handler(getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }, 2000);
     }
 
     private void goToDashboard() {
         Handler handler = new Handler(getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
         }, 2000);
     }
 }

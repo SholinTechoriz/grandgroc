@@ -49,7 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlLogoIcon"
             android:layout_centerHorizontal="true"
-            android:layout_margin="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="40dp"
             android:fontFamily="@font/muli_italic"
             android:gravity="center_horizontal"
             android:padding="5dp"
@@ -59,22 +62,25 @@
             android:id="@+id/btnGotoLogin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/tvContent"
             android:layout_centerHorizontal="true"
-            android:layout_margin="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/roundshapebtn"
             android:fontFamily="@font/muli_bold_italic"
-            android:padding="10dp"
+            android:padding="8dp"
             android:text="@string/login"
             android:textColor="@color/colorWhite"
             android:textSize="16sp" />
+
         <View
             android:layout_width="100dp"
             android:layout_height="5dp"
+            android:layout_above="@id/btnGotoLogin"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@color/colorBlack"
-            android:layout_margin="8dp"
-            android:layout_alignParentBottom="true"/>
+            android:background="@color/colorBlack" />
 
     </RelativeLayout>
 

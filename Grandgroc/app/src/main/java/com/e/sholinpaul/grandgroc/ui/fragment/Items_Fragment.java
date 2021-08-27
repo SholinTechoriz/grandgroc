@@ -40,6 +40,7 @@ public class Items_Fragment extends BaseFragments implements OrderDetailsListene
     }
 
     private void init() {
+        assert getArguments() != null;
         final OrderModel orderModel = getArguments().getParcelable("order");
         final String ScanState = getArguments().getString("ActivityState");
         final String AllOrdersState = getArguments().getString("OrderLIST");
@@ -53,6 +54,7 @@ public class Items_Fragment extends BaseFragments implements OrderDetailsListene
 
             Order_id = Integer.parseInt(OId);
             id = Integer.parseInt(ID);
+
 
             fetchAllOrderList();
 
@@ -88,17 +90,14 @@ public class Items_Fragment extends BaseFragments implements OrderDetailsListene
             if (getActivity() == null) {
                 return;
             }
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+            getActivity().runOnUiThread(() -> {
 
-                    adapter = new ItemListFragmentAdapter(data, getActivity());
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                    binding.rvItemList.setLayoutManager(linearLayoutManager);
-                    binding.rvItemList.setAdapter(adapter);
+                adapter = new ItemListFragmentAdapter(data, getActivity());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                binding.rvItemList.setLayoutManager(linearLayoutManager);
+                binding.rvItemList.setAdapter(adapter);
 
 
-                }
             });
 
             binding.schItemListNotFound.setVisibility(View.GONE);

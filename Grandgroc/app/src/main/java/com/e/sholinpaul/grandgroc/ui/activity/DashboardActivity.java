@@ -178,7 +178,23 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
                 String qrCode = intentResult.getContents();
-                fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+                try {
+                    int scanned_code = Integer.parseInt(qrCode);
+//                    Toast.makeText(this, "valid Qrcode: " + scanned_code, Toast.LENGTH_SHORT).show();
+                    fetchCheckAssignedOrder(scanned_code);
+
+                } catch (Exception e) {
+                    Toast.makeText(this, "invalid Qrcode", Toast.LENGTH_SHORT).show();
+                }
+
+//                if (qrCode.contains("http://")) {
+//                    Toast.makeText(this, "invalid Qrcode", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Log.d("scanddd", "scanned Data is  : " + qrCode);
+//
+////                fetchCheckAssignedOrder(Integer.parseInt(qrCode));
+//                }
+
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -208,11 +224,12 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
         intent.putExtra("ID", ID);
         intent.putExtra("ActivityState", "scanActivity");
         startActivityForResult(intent, 301);
+
     }
 
     @Override
     public void fetchCheckAssignedOrderDetailsFailed(String errorMessage) {
-        Toast.makeText(this, "Qr Code is invalid", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, " Invalid Data ", Toast.LENGTH_SHORT).show();
     }
 
 

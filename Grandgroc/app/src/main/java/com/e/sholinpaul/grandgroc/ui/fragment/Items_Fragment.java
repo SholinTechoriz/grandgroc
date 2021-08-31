@@ -48,7 +48,6 @@ public class Items_Fragment extends BaseFragments implements OrderDetailsListene
 
         if (ScanState.equals("scanActivity")) {
 
-            Toast.makeText(getActivity(), " from Scanning Activity", Toast.LENGTH_SHORT).show();
             final String OId = getArguments().getString("orderscanned");
             final String ID = getArguments().getString("ID");
 
@@ -59,7 +58,6 @@ public class Items_Fragment extends BaseFragments implements OrderDetailsListene
             fetchAllOrderList();
 
         } else if (AllOrdersState.equals("OrderListActivity")) {
-            Toast.makeText(getActivity(), " from OrderList Activity", Toast.LENGTH_SHORT).show();
 
             Order_id = orderModel.getOrder_id();
             id = orderModel.getId();

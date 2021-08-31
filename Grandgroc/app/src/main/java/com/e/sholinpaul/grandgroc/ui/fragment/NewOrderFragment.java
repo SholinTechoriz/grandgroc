@@ -1,7 +1,6 @@
 package com.e.sholinpaul.grandgroc.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +35,7 @@ public class NewOrderFragment extends BaseFragments implements NewOrderListListe
     NewOrderFragmentAdapter adapter;
     NewOrderFragment fragment;
     RecyclerView rvNewOrder;
-    RelativeLayout schListNotFound,rlMain;
+    RelativeLayout schListNotFound, rlMain;
     LinearLayout lLoading;
     int page = 1;
 
@@ -56,7 +54,7 @@ public class NewOrderFragment extends BaseFragments implements NewOrderListListe
         orderData = new ArrayList<>();
         rvNewOrder = view.findViewById(R.id.rvNewOrder);
         schListNotFound = view.findViewById(R.id.schListNotFound);
-        rlMain=view.findViewById(R.id.rlMain);
+        rlMain = view.findViewById(R.id.rlMain);
         lLoading = view.findViewById(R.id.lLoading);
         fetchNewOrderFromServer(page);
         fetchOrderTypes();
@@ -107,6 +105,7 @@ public class NewOrderFragment extends BaseFragments implements NewOrderListListe
 
 
     private void fetchNewOrderFromServer(int page) {
+        rvNewOrder.setAdapter(null);
         accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
         OrdersCloudManager orderListCloudManager = new OrdersCloudManager(getActivity());
@@ -141,18 +140,21 @@ public class NewOrderFragment extends BaseFragments implements NewOrderListListe
         allOrderModel = Assigned_orders;
         page = Assigned_orders.getCurrent_page();
 
-        if (page == 1) {
-            setDataToAdapter(orderData);
-        } else {
-            adapter.addAll(orderData);
-            adapter.notifyDataSetChanged();
-        }
-
+//        if (orderData.isEmpty()) {
+//            adapter.removeModel(orderData);
+//        } else {
+            if (page == 1) {
+                setDataToAdapter(orderData);
+            } else {
+                adapter.addAll(orderData);
+                adapter.notifyDataSetChanged();
+            }
+//        }
         for (int i = 0; i < rlMain.getChildCount(); i++) {
             View view = rlMain.getChildAt(i);
             enableDisableView(view, true);
         }
-//        adapter.removeModel(orderData);
+
         lLoading.setVisibility(View.GONE);
 
     }

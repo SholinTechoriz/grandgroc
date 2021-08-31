@@ -70,6 +70,7 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
     }
 
     private void fetchCurrentOrderFromServer(int page) {
+        rvCurrentOrder.setAdapter(null);
         accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
         OrdersCloudManager orderListCloudManager = new OrdersCloudManager(getActivity());
@@ -111,8 +112,6 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
     public void onResume() {
         super.onResume();
         fetchCurrentOrderFromServer(page);
-
-
     }
 
     @Override
@@ -120,18 +119,23 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
         orderData = Assigned_orders.getData();
         allOrderModel = Assigned_orders;
         page = Assigned_orders.getCurrent_page();
-
+//
+//        if (orderData.isEmpty()) {
+//            adapter.removeModel(orderData);
+//        } else {
         if (page == 1) {
             setDataToAdapter(orderData);
         } else {
             adapter.addAll(orderData);
             adapter.notifyDataSetChanged();
         }
+//        }
+
         for (int i = 0; i < rlCMain.getChildCount(); i++) {
             View view = rlCMain.getChildAt(i);
             enableDisableView(view, true);
         }
-//                adapter.removeModel(orderData);
+
 
         lLoading.setVisibility(View.GONE);
     }
@@ -148,9 +152,7 @@ public class CurrentOrderFragment extends BaseFragments implements NewOrderListL
             enableDisableView(view, true);
         }
         lLoading.setVisibility(View.GONE);
-
     }
-
 
     public static void enableDisableView(View view, boolean enabled) {
         view.setEnabled(enabled);

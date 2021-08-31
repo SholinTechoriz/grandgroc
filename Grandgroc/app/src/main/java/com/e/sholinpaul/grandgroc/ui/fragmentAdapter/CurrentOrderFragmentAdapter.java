@@ -15,7 +15,6 @@ import com.e.sholinpaul.grandgroc.databinding.SingleneworderlayoutBinding;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.ui.activity.OrderDetailsActivity;
 import com.e.sholinpaul.grandgroc.ui.fragment.CurrentOrderFragment;
-import com.e.sholinpaul.grandgroc.ui.fragment.NewOrderFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -80,8 +79,6 @@ public class CurrentOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerVi
 
                 }
             });
-
-
         }
 
     }
@@ -92,7 +89,7 @@ public class CurrentOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerVi
         Intent intent = new Intent(mcontext, OrderDetailsActivity.class);
         intent.putExtra("order", orderModel);
         intent.putExtra("OrderLIST", "OrderListActivity");
-        ((Activity) mcontext).startActivityForResult(intent,301);
+        ((Activity) mcontext).startActivityForResult(intent, 301);
 
     }
 
@@ -113,8 +110,9 @@ public class CurrentOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerVi
         notifyDataSetChanged();
     }
 
-    public void removeModel(ArrayList<OrderModel> moveResults) {
-        if (NewOrderList != null) NewOrderList.remove(moveResults);
+    public void removeItem(int position) {
+        NewOrderList.remove(position);
+        notifyItemRemoved(position);
         notifyDataSetChanged();
     }
 

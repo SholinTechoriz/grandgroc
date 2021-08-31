@@ -16,6 +16,8 @@ import com.e.sholinpaul.grandgroc.databinding.LocationFragmentBinding;
 import com.e.sholinpaul.grandgroc.model.Model.OrderModel;
 import com.e.sholinpaul.grandgroc.model.Model.PlaceModel;
 import com.e.sholinpaul.grandgroc.model.Model.ProductModel;
+import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.CurrentOrderFragmentAdapter;
+import com.e.sholinpaul.grandgroc.ui.fragmentAdapter.NewOrderFragmentAdapter;
 import com.e.sholinpaul.grandgroc.utils.BusinessDetailsGenerator;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,6 +33,8 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
     int Order_id, id;
     String accessToken, deviceId, status;
     LocationFragmentBinding binding;
+    CurrentOrderFragmentAdapter cAdapter;
+    NewOrderFragmentAdapter nAdapter;
     GoogleMap map;
 
 
@@ -153,8 +157,7 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
     }
 
     private void postChangeStatus() {
-        Toast.makeText(getActivity(), "Activity", Toast.LENGTH_SHORT).show();
-
+        
         OrderModel orderModel = new OrderModel();
         accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();

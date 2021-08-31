@@ -112,8 +112,9 @@ public class NewOrderFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         notifyDataSetChanged();
     }
 
-    public void removeModel(ArrayList<OrderModel> moveResults) {
-        if (NewOrderList != null) NewOrderList.remove(moveResults);
+    public void removeItem(int position) {
+        NewOrderList.remove(position);
+        notifyItemRemoved(position);
         notifyDataSetChanged();
     }
 

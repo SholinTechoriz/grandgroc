@@ -28,10 +28,10 @@ public class LoginCloudManager extends BaseCloudManger {
                 LoginResponse loginResponse = response.body();
                 if (loginResponse != null) {
                     if (loginResponse.success == "true") {
-                        LoginSPManager loyaltyMessagesDBManager = new LoginSPManager(mContext);
-                        loyaltyMessagesDBManager.saveLoginDetailsToSP(loginResponse.delivery_details);
+                        LoginSPManager loginSPManager = new LoginSPManager(mContext);
+                        loginSPManager.saveLoginDetailsToSP(loginResponse.delivery_details);
                         if (listener != null) {
-                            listener.fetchLoginDetails(loginResponse.delivery_details , loginResponse.msg);
+                            listener.fetchLoginDetails(loginResponse.delivery_details, loginResponse.msg);
                         }
                     } else {
                         if (listener != null) {

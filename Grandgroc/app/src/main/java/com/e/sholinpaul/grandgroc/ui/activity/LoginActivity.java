@@ -32,8 +32,8 @@ public class LoginActivity extends BaseActivity implements LoginListener {
     }
 
     private void init() {
-        binding.edUsername.setText("adilmycareer@gmail.com");
-        binding.edPassword.setText("123123");
+        binding.edUsername.setText("boys@gmail.com");
+        binding.edPassword.setText("123456");
         binding.btnSignIn.setOnClickListener(v -> {
             if (doubleClickPrevent()) {
                 hideKeyboard(v);

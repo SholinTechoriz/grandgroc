@@ -151,39 +151,42 @@
                     android:id="@+id/btnCollected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
+                    android:fontFamily="@font/muli_semi_bold_italic"
                     android:padding="5dp"
                     android:text="@string/collected"
                     android:textColor="@color/colorWhite"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnDelivered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:padding="5dp"
                     android:text="@string/delivered"
+                    android:fontFamily="@font/muli_semi_bold_italic"
                     android:textColor="@color/colorWhite"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnCompleted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/muli_semi_bold_italic"
                     android:background="@color/colorPrimary"
                     android:padding="5dp"
                     android:text="@string/completed"
                     android:textColor="@color/colorWhite"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

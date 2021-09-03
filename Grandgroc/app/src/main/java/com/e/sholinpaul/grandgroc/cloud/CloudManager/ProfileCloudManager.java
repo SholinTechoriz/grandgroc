@@ -78,8 +78,8 @@ public class ProfileCloudManager extends BaseCloudManger {
 
                 if (userProfileResponse != null) {
                     if (userProfileResponse.success == "true") {
-//                        LoginSPManager loyaltyMessagesDBManager = new LoginSPManager(mContext);
-//                        loyaltyMessagesDBManager.saveLoginDetailsToSP(userProfileResponse.delivaryboy);
+                        LoginSPManager loginSPManager = new LoginSPManager(mContext);
+                        loginSPManager.saveLoginDetailsToSP(userProfileResponse.delivaryboy);
                         if (listener != null) {
                             listener.updateProfileDetails(userProfileResponse.delivaryboy, userProfileResponse.msg);
                         }

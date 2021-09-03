@@ -38,7 +38,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="6dp"
-            android:fontFamily="@font/muli_semi_bold_italic"
+            android:fontFamily="@font/muli_italic"
             android:padding="5dp"
             android:text="@string/do_u_want_to_logout"
             android:textColor="@color/colorBlack"

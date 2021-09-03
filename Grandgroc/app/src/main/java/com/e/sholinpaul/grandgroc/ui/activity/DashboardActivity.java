@@ -186,7 +186,6 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
                 } catch (Exception e) {
                     Toast.makeText(this, "invalid Qrcode", Toast.LENGTH_SHORT).show();
                 }
-
 //                if (qrCode.contains("http://")) {
 //                    Toast.makeText(this, "invalid Qrcode", Toast.LENGTH_SHORT).show();
 //                } else {
@@ -194,12 +193,12 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
 //
 ////                fetchCheckAssignedOrder(Integer.parseInt(qrCode));
 //                }
-
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
 
 
     private void fetchCheckAssignedOrder(int Order_id) {
@@ -224,7 +223,6 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
         intent.putExtra("ID", ID);
         intent.putExtra("ActivityState", "scanActivity");
         startActivityForResult(intent, 301);
-
     }
 
     @Override
@@ -239,6 +237,4 @@ public class DashboardActivity extends BaseActivity implements CheckAssignedOrde
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-
 }

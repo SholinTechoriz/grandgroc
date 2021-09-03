@@ -10,14 +10,14 @@
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/drawable/ic_location.xml" value="0.27314814814814814" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/drawable/ic_user__profile_.xml" value="0.262037037037037" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/activity_dashboard.xml" value="0.2368659420289855" />
-        <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/activity_login.xml" value="0.2368659420289855" />
+        <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/activity_order_details.xml" value="0.2368659420289855" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/activity_scanner.xml" value="0.2604166666666667" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/activity_splash.xml" value="0.12" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/app_bar_dashboard.xml" value="0.2368659420289855" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/content_dashboard.xml" value="0.2368659420289855" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/current_order_fragment.xml" value="0.17831813576494426" />
-        <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/custom_changepassword_layout.xml" value="0.13171225937183384" />
+        <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/custom_changepassword_layout.xml" value="0.25" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/custom_info_contents.xml" value="0.15989583333333332" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/custom_noconnectionalert.xml" value="0.2558876811594203" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/footer_section.xml" value="0.2368659420289855" />
@@ -30,7 +30,7 @@
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/neworder_fragment.xml" value="0.17831813576494426" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/single_itemlistlayout.xml" value="0.2368659420289855" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/singlelogoutlayout.xml" value="0.2368659420289855" />
-        <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/singleneworderlayout.xml" value="0.2558876811594203" />
+        <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/singleneworderlayout.xml" value="0.25" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/singleprice_detailslayout.xml" value="0.2368659420289855" />
         <entry key="..\:/Grandgroc/grandgroc/Grandgroc/app/src/main/res/layout/tab_neworder.xml" value="0.2368659420289855" />
       </map>

@@ -41,7 +41,6 @@ public class PriceListFragmentAdapter extends RecyclerView.Adapter<RecyclerView.
             return new MyViewHolder(singlepriceDetailslayoutBinding);
 
         } else {
-
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_section, parent, false);
             return new LoadingViewHolder(view);
         }

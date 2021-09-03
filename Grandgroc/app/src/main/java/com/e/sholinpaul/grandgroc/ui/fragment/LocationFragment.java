@@ -157,7 +157,7 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
     }
 
     private void postChangeStatus() {
-        
+
         OrderModel orderModel = new OrderModel();
         accessToken = BusinessDetailsGenerator.getInstance(getActivity()).getApi_token();
         deviceId = BusinessDetailsGenerator.getInstance(getActivity()).getDeviceId();
@@ -205,8 +205,8 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
 
             case "delivered":
 //                binding.btnDelivered.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnDelivered.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                binding.btnDelivered.setTextColor(getResources().getColor(R.color.colorWhite));
 
                 binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -219,8 +219,8 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
             case "collected":
 
 //                binding.btnCollected.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-                binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                binding.btnCollected.setTextColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                binding.btnCollected.setTextColor(getResources().getColor(R.color.colorWhite));
 
                 binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -232,8 +232,8 @@ public class LocationFragment extends BaseFragments implements OrderDetailsListe
 
             case "completed":
 //                binding.btnCompleted.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorPrimary));
+                binding.btnCompleted.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                binding.btnCompleted.setTextColor(getResources().getColor(R.color.colorWhite));
 
                 binding.btnCollected.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 binding.btnCollected.setTextColor(getResources().getColor(R.color.colorWhite));

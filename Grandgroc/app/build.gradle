@@ -25,12 +25,29 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+//        debug {
+//            ext.alwaysUpdateBuildId = false
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+//            def versionName = variant.versionName //e.g 1.0.0
+                outputFileName = "GrandGroc.apk"
+
+        }
+    }
+
+
 }
 
 dependencies {
